@@ -30,6 +30,10 @@ canvas{
     z-index: 1;
 }
 
+.bottomMargin {
+    margin-bottom: 40px;
+}
+
 button {
     display: flex;
     align-items: center;
@@ -65,8 +69,16 @@ button:active {
     height: 40px;
 }
 
+.thinBox {
+    width: 100px;
+}
+
 .green {
     background-color: #B2FF8E;
+}
+
+.red {
+    background-color: #FDA3A3;
 }
 
 .colorful {

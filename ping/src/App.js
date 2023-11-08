@@ -1,9 +1,13 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Box from './Cubes.js';
-import HomeScreen from './Home';
-
 import "./style.css" 
+
+// import HomeScreen from './Home';
+// import PauseScreen from './Pause.js';
+// import PlayScreen from './Play.js';
+// import CustomizeScreen from './Customize.js';
+import AccessibilityScreen from './Accessibility.js';
 
 function App() {
   let canvasStyle = {
@@ -19,7 +23,7 @@ function App() {
         <Box position={[1.2, 0, 0]} />
       </Canvas>
       <div id="menu">
-        <HomeScreen></HomeScreen>
+        <AccessibilityScreen></AccessibilityScreen>
       </div>
     </div>
   );
