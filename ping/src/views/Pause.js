@@ -5,7 +5,7 @@ import './pause.css';
 function PauseScreen(props){
     return (
        <div id="pauseScreen">
-        <button className='shortBox thinBox red bottomMargin' onClick={function(){props.setGame('home'); props.setPlay(false)}}>EXIT GAME</button>
+        <button className='shortBox thinBox red bottomMargin' onClick={() => props.setGame('confirm')}>EXIT GAME</button>
         <button className='shortBox colorful' onClick={() => props.setGame('customize')}>customize visuals</button>
         <button className='bottomMargin' onClick={() => props.setGame('accessibility')}>accessibility & <br></br> controls</button>
         <button className='bigFont green' onClick={() => props.setGame('playing')}>RESUME</button>
