@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import Ball from './elements/Ball.js';
+import { useStore } from './state/useStore'
 import "./style.css" 
 
 import PlayScreen from './views/Play.js';
@@ -10,6 +10,10 @@ import HomeScreen from './views/Home.js';
 import PauseScreen from './views/Pause.js';
 import ConfirmScreen from './views/Confirm.js';
 
+import Ball from './elements/Ball.js';
+import Paddle from './elements/Paddle.js';
+import GameState from './GameState';
+
 
 function Screen() {
     const [gameState, setGameState] = useState('home');
@@ -17,6 +21,7 @@ function Screen() {
 
     let canvasStyle = {
         position: "absolute",
+        cursor: (gameState === 'playing') ? "none" : "pointer"
     }
 
     let screenOverlay
@@ -44,12 +49,17 @@ function Screen() {
             break
     }
 
+
     return (
         <div id="parentContainer">
         <Canvas style={canvasStyle}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <Ball position={[0, 0, 0]} />
+            {(playingState===true) && <>
+                <Ball position={[0, 0, 0]} paused = {gameState === 'paused' || gameState === 'confirm'}/>
+                <Paddle position={[0,0,0]} paused = {gameState === 'paused' || gameState === 'confirm'}></Paddle>
+            </>}
+            <GameState></GameState>
         </Canvas>
         <div id="menu">
             {screenOverlay}
