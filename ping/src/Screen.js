@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useStore } from './state/useStore'
 import "./style.css" 
@@ -15,34 +15,39 @@ import Paddle from './elements/Paddle.js';
 import GameState from './GameState';
 
 
+const playingSelector = s => s.gamePlaying
+const overlaySelector = s => s.overlay
+
+
 function Screen() {
-    const [gameState, setGameState] = useState('home');
-    const [playingState, setPlayingState] = useState(false);
+    const overlay = useStore(overlaySelector)
+    const gamePlaying = useStore(playingSelector)
 
     let canvasStyle = {
         position: "absolute",
-        cursor: (gameState === 'playing') ? "none" : "pointer"
+        cursor: (overlay === 'playing') ? "none" : "pointer"
     }
 
+    // TODO Replace switch?
     let screenOverlay
-    switch(gameState) {
+    switch(overlay) {
         case 'home':
-            screenOverlay = <HomeScreen setGame = {setGameState} setPlay = {setPlayingState}></HomeScreen>;
+            screenOverlay = <HomeScreen></HomeScreen>;
             break
         case 'playing':
-            screenOverlay = <PlayScreen setGame = {setGameState}></PlayScreen>;
+            screenOverlay = <PlayScreen></PlayScreen>;
             break
         case 'paused':
-            screenOverlay = <PauseScreen setGame = {setGameState}></PauseScreen>;
+            screenOverlay = <PauseScreen></PauseScreen>;
             break
         case 'accessibility':
-            screenOverlay = <AccessibilityScreen setGame = {setGameState} playingState = {playingState}></AccessibilityScreen>;
+            screenOverlay = <AccessibilityScreen></AccessibilityScreen>;
             break
         case 'customize':
-            screenOverlay = <CustomizeScreen setGame = {setGameState} playingState = {playingState}></CustomizeScreen>;
+            screenOverlay = <CustomizeScreen></CustomizeScreen>;
             break
         case 'confirm':
-            screenOverlay = <ConfirmScreen setGame = {setGameState} setPlay = {setPlayingState}></ConfirmScreen>;
+            screenOverlay = <ConfirmScreen></ConfirmScreen>;
             break
         default:
             screenOverlay = <div>A screen overlay has been request that doesn't exist... oops</div>;
@@ -55,9 +60,10 @@ function Screen() {
         <Canvas style={canvasStyle}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            {(playingState===true) && <>
-                <Ball position={[0, 0, 0]} paused = {gameState === 'paused' || gameState === 'confirm'}/>
-                <Paddle position={[0,0,0]} paused = {gameState === 'paused' || gameState === 'confirm'}></Paddle>
+            {/* TODO swap out this with something from GameState */}
+            {(gamePlaying) && <> 
+                <Ball position={[0, 0, 0]}></Ball>
+                <Paddle position={[0,0,0]}></Paddle>
             </>}
             <GameState></GameState>
         </Canvas>

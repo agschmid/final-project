@@ -1,14 +1,19 @@
 import React from 'react';
 import './pause.css';
+import { useStore } from '../state/useStore'
+
+const setOverlaySelector = s => s.setOverlay
 
 //Component for a roll, its price, and options, as would be shown on the products page
-function PauseScreen(props){
+function PauseScreen(){
+    const setOverlay = useStore(setOverlaySelector)
+
     return (
        <div id="pauseScreen">
-        <button className='shortBox thinBox red bottomMargin' onClick={() => props.setGame('confirm')}>EXIT GAME</button>
-        <button className='shortBox colorful' onClick={() => props.setGame('customize')}>customize visuals</button>
-        <button className='bottomMargin' onClick={() => props.setGame('accessibility')}>accessibility & <br></br> controls</button>
-        <button className='bigFont green' onClick={() => props.setGame('playing')}>RESUME</button>
+        <button className='shortBox thinBox red bottomMargin' onClick={() => setOverlay('confirm')}>EXIT GAME</button>
+        <button className='shortBox colorful' onClick={() => setOverlay('customize')}>customize visuals</button>
+        <button className='bottomMargin' onClick={() => setOverlay('accessibility')}>accessibility & <br></br> controls</button>
+        <button className='bigFont green' onClick={() => setOverlay('playing')}>RESUME</button>
        </div>
     ) 
 }
