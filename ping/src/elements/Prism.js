@@ -6,7 +6,7 @@ import { useStore } from '../state/useStore'
 
 
 function Prism(props) {
-  const grid = useLoader(TextureLoader, '/textures/grid-pink.png')
+  const grid = useLoader(TextureLoader, './textures/grid-pink.png')
   grid.wrapS = THREE.RepeatWrapping;
   grid.wrapT = THREE.RepeatWrapping;
   grid.offset.set( 0, 0 );
@@ -20,7 +20,7 @@ function Prism(props) {
       ref={prism}
       {...props}
       >
-      <boxGeometry args={[5, 5, 23]} />
+      <boxGeometry args={[5, 5, 20]} />
       <meshStandardMaterial 
         receiveShadow 
         map={grid}

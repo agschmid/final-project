@@ -15,7 +15,7 @@ const glowSquareSelector = s => s.glowSquare
 const paddleWidth = 1
 const paddleHeight = 1
 const speedMultiplier = 5;
-const ballRadius = 1
+const ballRadius = 0.5
 let svx=0
 let svy=0 //TODO check best way to set velocity
 let svz = 1
@@ -40,11 +40,11 @@ export default function GameState() {
         if (Math.abs(ball.current.position.y)>=2){
             svy = -svy
         }
-        if (ball.current.position.z >= 0 || ball.current.position.z <= -10){
+        if (ball.current.position.z >= -0.5 || ball.current.position.z <= -10){
             svz = -svz
         }
 
-        if (ball.current.position.z>=0){
+        if (ball.current.position.z>= -0.5){
             const xDif = paddle.current.position.x-ball.current.position.x
             const yDif = paddle.current.position.y-ball.current.position.y
             const a=Math.abs(xDif)
@@ -66,7 +66,7 @@ export default function GameState() {
 
         const positionDelta = speedMultiplier * delta;
         
-        ball.current.position.z = Math.max(-10, Math.min(0, ball.current.position.z + positionDelta * svz));
+        ball.current.position.z = Math.max(-10, Math.min(-0.5, ball.current.position.z + positionDelta * svz));
         glowSquare.current.position.z = ball.current.position.z;
         ball.current.position.x = Math.max(-2, Math.min(2, ball.current.position.x + positionDelta * svx));
         ball.current.position.y = Math.max(-2, Math.min(2, ball.current.position.y + positionDelta * svy));

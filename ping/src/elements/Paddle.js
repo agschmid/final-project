@@ -5,7 +5,7 @@ import { useStore } from '../state/useStore'
 
 
 function Paddle(props) {
-    const texture = useLoader(TextureLoader, '/textures/paddle.png')
+    const texture = useLoader(TextureLoader, './textures/paddle.png')
 
     let paddle = useStore((s) => s.paddle)
 

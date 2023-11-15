@@ -61,21 +61,15 @@ function Screen() {
 
     return (
         <div id="parentContainer">
-        <Canvas camera={{ fov: 50 }} shadows style={canvasStyle} >
-            <perspectiveCamera
-                fov={20}
-                near={1}
-                far={1000}
-                position={[0, 0, 5]}
-            />
+        <Canvas camera={{ fov: 80, position: [0,0,2]}} shadows style={canvasStyle} >
             <ambientLight intensity={0.5} />
             <directionalLight position={[0.5, 0.5, 4]} />
             <directionalLight position={[-0.5, 0.5, 1]} />
             {/* TODO swap out this with something from GameState */}
             {(gamePlaying) && <> 
-                <Ball castShadow position={[0, 0, 0]}></Ball>
+                <Ball castShadow position={[0, 0, -0.5]}></Ball>
                 <GlowSquare></GlowSquare>
-                <Paddle position={[0,0,0.2]}></Paddle>
+                <Paddle position={[0,0,0]}></Paddle>
                 <Prism castShadow receiveShadow position={[0,0,0]}></Prism>
             </>}
             <GameState></GameState>
