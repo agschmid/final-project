@@ -1,5 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
+import { Bloom, EffectComposer} from '@react-three/postprocessing'
+
 import { useStore } from './state/useStore'
 import "./style.css" 
 
@@ -12,7 +14,9 @@ import ConfirmScreen from './views/Confirm.js';
 
 import Ball from './elements/Ball.js';
 import Paddle from './elements/Paddle.js';
+import Prism from './elements/Prism.js';
 import GameState from './GameState';
+import GlowSquare from './elements/GlowSquare';
 
 
 const playingSelector = s => s.gamePlaying
@@ -57,15 +61,27 @@ function Screen() {
 
     return (
         <div id="parentContainer">
-        <Canvas style={canvasStyle}>
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
+        <Canvas camera={{ fov: 50 }} shadows style={canvasStyle} >
+            <perspectiveCamera
+                fov={20}
+                near={1}
+                far={1000}
+                position={[0, 0, 5]}
+            />
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[0.5, 0.5, 4]} />
+            <directionalLight position={[-0.5, 0.5, 1]} />
             {/* TODO swap out this with something from GameState */}
             {(gamePlaying) && <> 
-                <Ball position={[0, 0, 0]}></Ball>
-                <Paddle position={[0,0,0]}></Paddle>
+                <Ball castShadow position={[0, 0, 0]}></Ball>
+                <GlowSquare></GlowSquare>
+                <Paddle position={[0,0,0.2]}></Paddle>
+                <Prism castShadow receiveShadow position={[0,0,0]}></Prism>
             </>}
             <GameState></GameState>
+            <EffectComposer>
+                <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} intensity={0.5} />
+            </EffectComposer>
         </Canvas>
         <div id="menu">
             {screenOverlay}

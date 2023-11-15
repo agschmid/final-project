@@ -1,8 +1,12 @@
 import React from 'react'
+import {useLoader} from '@react-three/fiber'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { useStore } from '../state/useStore'
 
 
 function Paddle(props) {
+    const texture = useLoader(TextureLoader, '/textures/paddle.png')
+
     let paddle = useStore((s) => s.paddle)
 
     // Return the view, these are regular Threejs elements expressed in JSX
@@ -12,7 +16,7 @@ function Paddle(props) {
         ref={paddle}
         >
         <planeGeometry args={[1, 1]} />
-        <meshStandardMaterial color={'blue'} side = {'THREE.DoubleSide'} transparent= {true} opacity = {0.3} />
+        <meshStandardMaterial map={texture} side = {'THREE.DoubleSide'} transparent= {true} />
         </mesh>
     )
 }

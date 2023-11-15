@@ -9,6 +9,7 @@ const ballSelector = s => s.ball
 const paddleSelector = s => s.paddle
 const playingSelector = s => s.gamePlaying
 const overlaySelector = s => s.overlay
+const glowSquareSelector = s => s.glowSquare
 
 
 const paddleWidth = 1
@@ -24,6 +25,7 @@ export default function GameState() {
   const paddle = useStore(paddleSelector)
   const gamePlaying = useStore(playingSelector)
   const overlay = useStore(overlaySelector)
+  const glowSquare = useStore(glowSquareSelector)
 
 
   useFrame(({pointer}, delta) => {
@@ -52,8 +54,8 @@ export default function GameState() {
                 let beta = b*2/paddleHeight
         
                 let vScale = (1 / (alpha**2 + beta**2 + 1))**0.5
-                svx = Math.sign(xDif)*vScale*alpha
-                svy = Math.sign(yDif)*vScale*beta
+                svx = -Math.sign(xDif)*vScale*alpha
+                svy = -Math.sign(yDif)*vScale*beta
                 svz = ((svz>=0) ? 1 : -1)*vScale
             } else {
                 svz=0
@@ -65,6 +67,7 @@ export default function GameState() {
         const positionDelta = speedMultiplier * delta;
         
         ball.current.position.z = Math.max(-10, Math.min(0, ball.current.position.z + positionDelta * svz));
+        glowSquare.current.position.z = ball.current.position.z;
         ball.current.position.x = Math.max(-2, Math.min(2, ball.current.position.x + positionDelta * svx));
         ball.current.position.y = Math.max(-2, Math.min(2, ball.current.position.y + positionDelta * svy));
     }

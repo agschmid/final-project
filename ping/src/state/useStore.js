@@ -5,6 +5,8 @@ const useStore = create((set, get) => {
   return {
     paddle: createRef(),
     ball: createRef(),
+    prism: createRef(),
+    glowSquare: createRef(),
     overlay: 'home',
     gamePlaying: false,
     setGamePlaying: (gamePlaying) => set(state => ({ gamePlaying: gamePlaying })),
