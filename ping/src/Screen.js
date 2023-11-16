@@ -12,6 +12,7 @@ import HomeScreen from './views/Home.js';
 import PauseScreen from './views/Pause.js';
 import ConfirmScreen from './views/Confirm.js';
 
+import Background from './elements/Background.js';
 import Ball from './elements/Ball.js';
 import Paddle from './elements/Paddle.js';
 import Enemy from './elements/Enemy.js';
@@ -73,11 +74,14 @@ function Screen() {
                 <Paddle position={[0,0,0]}></Paddle>
                 <Enemy position={[0,0,-10]}></Enemy>
                 <Prism castShadow receiveShadow></Prism>
+                <Background></Background>
             </>}
             <GameState></GameState>
+
             <EffectComposer>
                 <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} intensity={0.5} />
             </EffectComposer>
+            
         </Canvas>
         <div id="menu">
             {screenOverlay}

@@ -17,7 +17,7 @@ function Enemy(props) {
         ref={enemy}
         >
         <planeGeometry args={[1, 1]} />
-        <meshStandardMaterial map={texture} side = {'THREE.DoubleSide'} transparent= {true} emissive = {0xffffff} emissiveIntensity = {enemyBrightness}/>
+        <meshStandardMaterial map={texture} side = {'THREE.DoubleSide'} transparent= {true} emissive = {0xff0000} emissiveIntensity = {1}/>
         </mesh>
     )
 }
