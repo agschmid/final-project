@@ -16,17 +16,56 @@ function Prism(props) {
 
 
   return (
+    <mesh ref={prism}>
     <mesh
-      ref={prism}
       {...props}
+      position={[2.5,0,-5]}
+      rotation={[Math.PI/2,-Math.PI/2,0]}
       >
-      <boxGeometry args={[5, 5, 20]} />
+      <planeGeometry args={[5, 10]}/>
+      {/* <boxGeometry args={[5, 5, 20]} /> */}
       <meshStandardMaterial 
         receiveShadow 
         map={grid}
-        side={THREE.BackSide} 
       />
     </mesh>
+    <mesh
+    {...props}
+    position={[-2.5,0,-5]}
+    rotation={[-Math.PI/2,Math.PI/2,0]}
+    >
+    <planeGeometry args={[5, 10]}/>
+    {/* <boxGeometry args={[5, 5, 20]} /> */}
+    <meshStandardMaterial 
+      receiveShadow 
+      map={grid}
+    />
+  </mesh>
+  <mesh
+      {...props}
+      position={[0,2.5,-5]}
+      rotation={[Math.PI/2,0,0]}
+      >
+      <planeGeometry args={[5, 10]}/>
+      {/* <boxGeometry args={[5, 5, 20]} /> */}
+      <meshStandardMaterial 
+        receiveShadow 
+        map={grid}
+      />
+    </mesh>
+    <mesh
+    {...props}
+    position={[0,-2.5,-5]}
+    rotation={[-Math.PI/2,0,0]}
+    >
+    <planeGeometry args={[5, 10]}/>
+    {/* <boxGeometry args={[5, 5, 20]} /> */}
+    <meshStandardMaterial 
+      receiveShadow 
+      map={grid}
+    />
+  </mesh>
+  </mesh>
   )
 }
 

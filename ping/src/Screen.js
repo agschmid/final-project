@@ -14,6 +14,7 @@ import ConfirmScreen from './views/Confirm.js';
 
 import Ball from './elements/Ball.js';
 import Paddle from './elements/Paddle.js';
+import Enemy from './elements/Enemy.js';
 import Prism from './elements/Prism.js';
 import GameState from './GameState';
 import GlowSquare from './elements/GlowSquare';
@@ -70,7 +71,8 @@ function Screen() {
                 <Ball castShadow position={[0, 0, -0.5]}></Ball>
                 <GlowSquare></GlowSquare>
                 <Paddle position={[0,0,0]}></Paddle>
-                <Prism castShadow receiveShadow position={[0,0,0]}></Prism>
+                <Enemy position={[0,0,-10]}></Enemy>
+                <Prism castShadow receiveShadow></Prism>
             </>}
             <GameState></GameState>
             <EffectComposer>
