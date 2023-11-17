@@ -10,16 +10,17 @@ const paddleSelector = s => s.paddle
 const enemySelector = s => s.enemy
 const playingSelector = s => s.gamePlaying
 const overlaySelector = s => s.overlay
-const glowSquareSelector = s => s.glowSquare
 const paddleBrightnessSelector = s => s.paddleBrightness
 const setPaddleBrightnessSelector = s => s.setPaddleBrightness
 const gameVariablesSelector = s => s.gameVariables
+const setSpeedMultiplierSelector = s => s.setSpeedMultiplier
+const speedMultiplierSelector = s => s.speedMultiplier
 
-const speedMultiplier = 5;
 
 let svx=0
 let svy=0 //TODO check best way to set velocity
 let svz = 1
+
 
 export default function GameState() {
   const ball = useStore(ballSelector)
@@ -27,17 +28,20 @@ export default function GameState() {
   const enemy = useStore(enemySelector)
   const gamePlaying = useStore(playingSelector)
   const overlay = useStore(overlaySelector)
-  const glowSquare = useStore(glowSquareSelector)
   let paddleBrightness = useStore(paddleBrightnessSelector)
   let setPaddleBrightness = useStore(setPaddleBrightnessSelector)
 
   const gameVariables = useStore(gameVariablesSelector)
+  const speedMultiplier = useStore(speedMultiplierSelector)
+  const setSpeedMultiplier = useStore(setSpeedMultiplierSelector)
+
   const gameWidth = gameVariables.gameWidth
   const gameLength = gameVariables.gameLength
   const ballRadius = gameVariables.ballRadius
   const paddleWidth = gameVariables.paddleWidth
   const paddleHeight = paddleWidth
   const ballBounds = gameWidth/2 - ballRadius;
+
 
   useFrame(({pointer}, delta) => {
     if (gamePlaying && overlay!=='playing'){
@@ -56,6 +60,7 @@ export default function GameState() {
         }
         if (ball.current.position.z >= -ballRadius || ball.current.position.z <= -gameLength){
             svz = -svz
+            setSpeedMultiplier(speedMultiplier+0.5)
         }
 
         if (ball.current.position.z>= -ballRadius){
@@ -76,13 +81,13 @@ export default function GameState() {
                 svz=0
                 svx=0
                 svy=0
+                setSpeedMultiplier(5)
             }
         }
 
         const positionDelta = speedMultiplier * delta;
         
         ball.current.position.z = Math.max(-gameLength, Math.min(-ballRadius, ball.current.position.z + positionDelta * svz));
-        glowSquare.current.position.z = ball.current.position.z;
         ball.current.position.x = Math.max(-ballBounds, Math.min(ballBounds, ball.current.position.x + positionDelta * svx));
         ball.current.position.y = Math.max(-ballBounds, Math.min(ballBounds, ball.current.position.y + positionDelta * svy));
         enemy.current.position.x = ball.current.position.x

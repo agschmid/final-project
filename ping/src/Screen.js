@@ -9,6 +9,7 @@ import PlayScreen from './views/Play.js';
 import CustomizeScreen from './views/Customize.js';
 import AccessibilityScreen from './views/Accessibility.js';
 import HomeScreen from './views/Home.js';
+import CountdownScreen from './views/Countdown';
 import PauseScreen from './views/Pause.js';
 import ConfirmScreen from './views/Confirm.js';
 
@@ -18,7 +19,7 @@ import Paddle from './elements/Paddle.js';
 import Enemy from './elements/Enemy.js';
 import Prism from './elements/Prism.js';
 import GameState from './GameState';
-import GlowSquare from './elements/GlowSquare';
+import GlowGrid from './elements/GlowGrid';
 
 
 const playingSelector = s => s.gamePlaying
@@ -28,7 +29,7 @@ const overlaySelector = s => s.overlay
 function Screen() {
     const overlay = useStore(overlaySelector)
     const gamePlaying = useStore(playingSelector)
-
+    
     let canvasStyle = {
         position: "absolute",
         cursor: (overlay === 'playing') ? "none" : "pointer"
@@ -39,6 +40,9 @@ function Screen() {
     switch(overlay) {
         case 'home':
             screenOverlay = <HomeScreen></HomeScreen>;
+            break
+        case 'countdown':
+            screenOverlay = <CountdownScreen></CountdownScreen>;
             break
         case 'playing':
             screenOverlay = <PlayScreen></PlayScreen>;
@@ -70,16 +74,16 @@ function Screen() {
             {/* TODO swap out this with something from GameState */}
             {(gamePlaying) && <> 
                 <Ball castShadow position={[0, 0, -0.5]}></Ball>
-                <GlowSquare></GlowSquare>
                 <Paddle position={[0,0,0]}></Paddle>
                 <Enemy></Enemy>
                 <Prism castShadow receiveShadow></Prism>
+                <GlowGrid></GlowGrid>
                 <Background></Background>
             </>}
             <GameState></GameState>
 
             <EffectComposer>
-                <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} intensity={0.5} />
+                <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} intensity={1} />
             </EffectComposer>
             
         </Canvas>

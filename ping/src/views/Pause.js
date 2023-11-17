@@ -13,7 +13,7 @@ function PauseScreen(){
         <button className='shortBox thinBox red bottomMargin' onClick={() => setOverlay('confirm')}>EXIT GAME</button>
         <button className='shortBox colorful' onClick={() => setOverlay('customize')}>customize visuals</button>
         <button className='bottomMargin' onClick={() => setOverlay('accessibility')}>accessibility & <br></br> controls</button>
-        <button className='bigFont green' onClick={() => setOverlay('playing')}>RESUME</button>
+        <button className='bigFont green' onClick={() => setOverlay('countdown')}>RESUME</button>
        </div>
     ) 
 }

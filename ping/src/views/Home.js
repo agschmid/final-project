@@ -15,7 +15,7 @@ function HomeScreen(){
       <div id="homeScreen">
       <button className='shortBox colorful' onClick={() => setOverlay('customize')}>customize visuals</button>
       <button className='bottomMargin' onClick={() => setOverlay('accessibility')}>accessibility & <br></br> controls</button>
-      <button className='bigFont green' onClick={function(){setOverlay('playing'); setGamePlaying(true);}}>PLAY GAME</button>
+      <button className='bigFont green' onClick={function(){setOverlay('countdown'); setGamePlaying(true);}}>PLAY GAME</button>
       </div>
   ) 
 }
