@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useEffect} from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Bloom, EffectComposer} from '@react-three/postprocessing'
 
@@ -34,6 +34,11 @@ function Screen() {
         cursor: (overlay === 'playing') ? "none" : "pointer"
     }
 
+    useEffect(() => {
+        let threeCanvas = document.querySelector('canvas');
+        threeCanvas.parentElement.id = 'canvasParent'
+    })
+    
     // TODO Replace switch?
     let screenOverlay
     switch(overlay) {
@@ -62,7 +67,7 @@ function Screen() {
 
 
     return (
-        <div id="parentContainer">
+        <>
         <Canvas camera={{ fov: 80, position: [0,0,2]}} shadows style={canvasStyle} >
             <ambientLight intensity={0.5} />
             <directionalLight position={[0.5, 0.5, 4]} />
@@ -86,7 +91,7 @@ function Screen() {
         <div id="menu">
             {screenOverlay}
         </div>
-        </div>
+        </>
     );
 }
 
