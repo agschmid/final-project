@@ -13,17 +13,17 @@ function Prism(props) {
   grid.repeat.set( 5, 5 );
 
   let prism = useStore((s) => s.prism)
+  let gameInfo = useStore((s) => s.gameVariables)
 
 
   return (
     <mesh ref={prism}>
     <mesh
       {...props}
-      position={[2.5,0,-5]}
+      position={[gameInfo.gameWidth/2,0,-gameInfo.gameLength/2]}
       rotation={[Math.PI/2,-Math.PI/2,0]}
       >
-      <planeGeometry args={[5, 10]}/>
-      {/* <boxGeometry args={[5, 5, 20]} /> */}
+      <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
       <meshStandardMaterial 
         receiveShadow 
         map={grid}
@@ -31,10 +31,10 @@ function Prism(props) {
     </mesh>
     <mesh
     {...props}
-    position={[-2.5,0,-5]}
+    position={[-gameInfo.gameWidth/2,0,-gameInfo.gameLength/2]}
     rotation={[-Math.PI/2,Math.PI/2,0]}
     >
-    <planeGeometry args={[5, 10]}/>
+    <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
     {/* <boxGeometry args={[5, 5, 20]} /> */}
     <meshStandardMaterial 
       receiveShadow 
@@ -43,11 +43,10 @@ function Prism(props) {
   </mesh>
   <mesh
       {...props}
-      position={[0,2.5,-5]}
+      position={[0,gameInfo.gameWidth/2,-gameInfo.gameLength/2]}
       rotation={[Math.PI/2,0,0]}
       >
-      <planeGeometry args={[5, 10]}/>
-      {/* <boxGeometry args={[5, 5, 20]} /> */}
+      <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
       <meshStandardMaterial 
         receiveShadow 
         map={grid}
@@ -55,11 +54,10 @@ function Prism(props) {
     </mesh>
     <mesh
     {...props}
-    position={[0,-2.5,-5]}
+    position={[0,-gameInfo.gameWidth/2,-gameInfo.gameLength/2]}
     rotation={[-Math.PI/2,0,0]}
     >
-    <planeGeometry args={[5, 10]}/>
-    {/* <boxGeometry args={[5, 5, 20]} /> */}
+    <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
     <meshStandardMaterial 
       receiveShadow 
       map={grid}

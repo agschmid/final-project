@@ -9,14 +9,17 @@ function Enemy(props) {
 
     let enemy = useStore((s) => s.enemy)
     let enemyBrightness = useStore((s)=> s.enemyBrightness)
+    let gameInfo = useStore((s) => s.gameVariables)
+
 
     // Return the view, these are regular Threejs elements expressed in JSX
     return (
         <mesh
         {...props}
         ref={enemy}
+        position = {[0,0,-gameInfo.gameLength]}
         >
-        <planeGeometry args={[1, 1]} />
+        <planeGeometry args={[gameInfo.enemyWidth, gameInfo.enemyWidth]} />
         <meshStandardMaterial map={texture} side = {'THREE.DoubleSide'} transparent= {true} emissive = {0xff0000} emissiveIntensity = {1}/>
         </mesh>
     )

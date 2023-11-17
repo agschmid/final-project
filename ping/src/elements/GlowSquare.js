@@ -8,14 +8,14 @@ function GlowSquare(props) {
   const glow = useLoader(TextureLoader, './textures/glow.png')
 
   let glowSquare = useStore((s) => s.glowSquare)
-
+  let gameInfo = useStore((s) => s.gameVariables)
 
   return (
     <mesh
       ref={glowSquare}
       {...props}
       >
-      <planeGeometry args={[5, 5]} />
+      <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameWidth]} />
       <meshStandardMaterial 
         map={glow}
         transparent= {true} 

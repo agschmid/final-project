@@ -5,13 +5,14 @@ const color = 'orange'
 
 function Ball(props) {
   let ball = useStore((s) => s.ball)
-
+  let gameInfo = useStore((s) => s.gameVariables)
+  
   return (
     <mesh
       {...props}
       ref={ball}
       >
-      <sphereGeometry args={[0.5, 32, 16]} />
+      <sphereGeometry args={[gameInfo.ballRadius, 32, 16]} />
       <meshStandardMaterial color={color} />
     </mesh>
   )

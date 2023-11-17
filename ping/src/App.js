@@ -6,6 +6,9 @@ import Screen from './Screen.js';
 function App() {
 
   useEffect(() => {
+    let threeCanvas = document.querySelector('canvas');
+    threeCanvas.parentElement.id = 'canvasParent'
+
     document.body.addEventListener("touchstart", function (e) {
       if (e.target.id === "canvasParent") {
           e.preventDefault();

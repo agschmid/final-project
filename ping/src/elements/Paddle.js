@@ -9,14 +9,14 @@ function Paddle(props) {
 
     let paddle = useStore((s) => s.paddle)
     let paddleBrightness = useStore((s)=> s.paddleBrightness)
+    let gameInfo = useStore((s) => s.gameVariables)
 
-    // Return the view, these are regular Threejs elements expressed in JSX
     return (
         <mesh
         {...props}
         ref={paddle}
         >
-        <planeGeometry args={[1, 1]} />
+        <planeGeometry args={[gameInfo.paddleWidth, gameInfo.paddleWidth]} />
         <meshStandardMaterial map={texture} side = {'THREE.DoubleSide'} transparent= {true} emissive = {0xffffff} emissiveIntensity = {paddleBrightness}/>
         </mesh>
     )

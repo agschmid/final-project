@@ -1,17 +1,18 @@
 import React from 'react'
 import {useLoader} from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { useStore } from '../state/useStore'
 
 function Background(props) {
     const texture = useLoader(TextureLoader, './textures/background.jpg')
+    let gameInfo = useStore((s) => s.gameVariables)
 
-    // Return the view, these are regular Threejs elements expressed in JSX
     return (
         <mesh
         {...props}
-        position={[0,0,-10]}
+        position={[0,0,-gameInfo.gameLength]}
         >
-        <planeGeometry args={[13.73/2, 5]} />
+        <planeGeometry args={[gameInfo.gameLength*0.6865, gameInfo.gameWidth]} />
         <meshStandardMaterial map={texture} side = {'THREE.DoubleSide'}/>
         </mesh>
     )

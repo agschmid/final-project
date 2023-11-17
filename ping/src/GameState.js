@@ -13,12 +13,9 @@ const overlaySelector = s => s.overlay
 const glowSquareSelector = s => s.glowSquare
 const paddleBrightnessSelector = s => s.paddleBrightness
 const setPaddleBrightnessSelector = s => s.setPaddleBrightness
+const gameVariablesSelector = s => s.gameVariables
 
-
-const paddleWidth = 1
-const paddleHeight = 1
 const speedMultiplier = 5;
-const ballRadius = 0.5
 
 let svx=0
 let svy=0 //TODO check best way to set velocity
@@ -34,6 +31,13 @@ export default function GameState() {
   let paddleBrightness = useStore(paddleBrightnessSelector)
   let setPaddleBrightness = useStore(setPaddleBrightnessSelector)
 
+  const gameVariables = useStore(gameVariablesSelector)
+  const gameWidth = gameVariables.gameWidth
+  const gameLength = gameVariables.gameLength
+  const ballRadius = gameVariables.ballRadius
+  const paddleWidth = gameVariables.paddleWidth
+  const paddleHeight = paddleWidth
+  const ballBounds = gameWidth/2 - ballRadius;
 
   useFrame(({pointer}, delta) => {
     if (gamePlaying && overlay!=='playing'){
@@ -44,22 +48,22 @@ export default function GameState() {
         if (paddleBrightness>0){
             setPaddleBrightness(paddleBrightness-0.05)
         } //TODO also do enenmy brightness here
-        if (Math.abs(ball.current.position.x)>=2){
+        if (Math.abs(ball.current.position.x)>=ballBounds){
             svx =-svx 
         }
-        if (Math.abs(ball.current.position.y)>=2){
+        if (Math.abs(ball.current.position.y)>=ballBounds){
             svy = -svy
         }
-        if (ball.current.position.z >= -0.5 || ball.current.position.z <= -10){
+        if (ball.current.position.z >= -ballRadius || ball.current.position.z <= -gameLength){
             svz = -svz
         }
 
-        if (ball.current.position.z>= -0.5){
+        if (ball.current.position.z>= -ballRadius){
             const xDif = paddle.current.position.x-ball.current.position.x
             const yDif = paddle.current.position.y-ball.current.position.y
             const a=Math.abs(xDif)
             const b=Math.abs(yDif)
-            if (didPaddleHit(a-0.5*paddleWidth,b-0.5*paddleHeight, ballRadius)){
+            if (didPaddleHit(a-ballRadius*paddleWidth,b-ballRadius*paddleHeight, ballRadius)){
                 let alpha = a*2/paddleWidth
                 let beta = b*2/paddleHeight
         
@@ -77,10 +81,10 @@ export default function GameState() {
 
         const positionDelta = speedMultiplier * delta;
         
-        ball.current.position.z = Math.max(-10, Math.min(-0.5, ball.current.position.z + positionDelta * svz));
+        ball.current.position.z = Math.max(-gameLength, Math.min(-ballRadius, ball.current.position.z + positionDelta * svz));
         glowSquare.current.position.z = ball.current.position.z;
-        ball.current.position.x = Math.max(-2, Math.min(2, ball.current.position.x + positionDelta * svx));
-        ball.current.position.y = Math.max(-2, Math.min(2, ball.current.position.y + positionDelta * svy));
+        ball.current.position.x = Math.max(-ballBounds, Math.min(ballBounds, ball.current.position.x + positionDelta * svx));
+        ball.current.position.y = Math.max(-ballBounds, Math.min(ballBounds, ball.current.position.y + positionDelta * svy));
         enemy.current.position.x = ball.current.position.x
         enemy.current.position.y = ball.current.position.y
     }

@@ -1,4 +1,4 @@
-import {React, useEffect} from 'react';
+import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Bloom, EffectComposer} from '@react-three/postprocessing'
 
@@ -33,11 +33,6 @@ function Screen() {
         position: "absolute",
         cursor: (overlay === 'playing') ? "none" : "pointer"
     }
-
-    useEffect(() => {
-        let threeCanvas = document.querySelector('canvas');
-        threeCanvas.parentElement.id = 'canvasParent'
-    })
     
     // TODO Replace switch?
     let screenOverlay
@@ -77,7 +72,7 @@ function Screen() {
                 <Ball castShadow position={[0, 0, -0.5]}></Ball>
                 <GlowSquare></GlowSquare>
                 <Paddle position={[0,0,0]}></Paddle>
-                <Enemy position={[0,0,-10]}></Enemy>
+                <Enemy></Enemy>
                 <Prism castShadow receiveShadow></Prism>
                 <Background></Background>
             </>}

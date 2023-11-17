@@ -1,6 +1,6 @@
-import React from 'react';
+import {React, useEffect} from 'react';
 import './play.css';
-import { useStore } from '../state/useStore'
+import { mobileCheck, useStore } from '../state/useStore'
 
 const setOverlaySelector = s => s.setOverlay
 
@@ -8,9 +8,22 @@ const setOverlaySelector = s => s.setOverlay
 function PlayScreen(){
   const setOverlay = useStore(setOverlaySelector)
 
+  const escapePressed = (event) =>{
+    if (event.key === 'Escape') {
+      setOverlay('paused')
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", escapePressed)
+    return function cleanup() {
+      document.removeEventListener("keydown", escapePressed)
+    }
+  })
+
   return (
       <div id="playScreen">
-      <button className='shortBox thinBox pauseMargin' onClick={() => setOverlay('paused')}>PAUSE</button>
+      <button className='shortBox thinBox pauseMargin' onClick={() => setOverlay('paused')}>{mobileCheck() ? "PAUSE" :"PAUSE (ESC)"}</button>
       </div>
   ) 
 }
