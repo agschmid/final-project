@@ -3,11 +3,11 @@ import { useStore } from '../state/useStore'
 
 
 function GlowSquare(props) {
-  // const glow = useLoader(TextureLoader, './textures/glow.png')
+  let ref=useStore((s) => s.glowSquares[props.z])
   let gameInfo = useStore((s) => s.gameVariables)
   const delta = 0.01
   return (
-    <mesh>
+    <mesh ref={ref}>
     <mesh
       {...props}
       position={[gameInfo.gameWidth/2-delta,0,0+props.z]}
@@ -16,7 +16,7 @@ function GlowSquare(props) {
       <planeGeometry args={[gameInfo.gameWidth, 0.02]}/>
       <meshStandardMaterial 
       color={'#D06CD6'}
-      emissive = {'#D06CD6'} emissiveIntensity = {5}
+      emissive = {'#D06CD6'} emissiveIntensity = {props.glow}
       />
     </mesh>
     <mesh
@@ -25,10 +25,9 @@ function GlowSquare(props) {
     rotation={[-Math.PI/2,Math.PI/2,0]}
     >
     <planeGeometry args={[gameInfo.gameWidth, 0.02]}/>
-    {/* <boxGeometry args={[5, 5, 20]} /> */}
     <meshStandardMaterial 
       color={'#D06CD6'}
-      emissive = {'#D06CD6'} emissiveIntensity = {5}
+      emissive = {'#D06CD6'} emissiveIntensity = {props.glow}
 
     />
   </mesh>
@@ -40,7 +39,7 @@ function GlowSquare(props) {
       <planeGeometry args={[gameInfo.gameWidth, 0.02]}/>
       <meshStandardMaterial 
       color={'#D06CD6'}
-      emissive = {'#D06CD6'} emissiveIntensity = {5}
+      emissive = {'#D06CD6'} emissiveIntensity = {props.glow}
 
       />
     </mesh>
@@ -52,7 +51,7 @@ function GlowSquare(props) {
     <planeGeometry args={[gameInfo.gameWidth, 0.02]}/>
     <meshStandardMaterial 
       color={'#D06CD6'}
-      emissive = {'#D06CD6'} emissiveIntensity = {5}
+      emissive = {'#D06CD6'} emissiveIntensity = {props.glow}
 
     />
   </mesh>

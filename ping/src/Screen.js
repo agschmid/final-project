@@ -67,16 +67,16 @@ function Screen() {
 
     return (
         <>
-        <Canvas camera={{ fov: 80, position: [0,0,2]}} shadows style={canvasStyle} >
+        <Canvas camera={{ fov: 80, position: [0,0,2]}} style={canvasStyle} >
             <ambientLight intensity={0.5} />
             <directionalLight position={[0.5, 0.5, 4]} />
             <directionalLight position={[-0.5, 0.5, 1]} />
             {/* TODO swap out this with something from GameState */}
             {(gamePlaying) && <> 
-                <Ball castShadow position={[0, 0, -0.5]}></Ball>
+                <Ball position={[0, 0, -0.5]}></Ball>
                 <Paddle position={[0,0,0]}></Paddle>
                 <Enemy></Enemy>
-                <Prism castShadow receiveShadow></Prism>
+                <Prism  ></Prism>
                 <GlowGrid></GlowGrid>
                 <Background></Background>
             </>}

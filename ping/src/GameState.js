@@ -15,7 +15,8 @@ const setPaddleBrightnessSelector = s => s.setPaddleBrightness
 const gameVariablesSelector = s => s.gameVariables
 const setSpeedMultiplierSelector = s => s.setSpeedMultiplier
 const speedMultiplierSelector = s => s.speedMultiplier
-
+const setGlowValsSelector = s => s.setGlowVals
+const glowValsSelector = s => s.glowVals
 
 let svx=0
 let svy=0 //TODO check best way to set velocity
@@ -30,6 +31,10 @@ export default function GameState() {
   const overlay = useStore(overlaySelector)
   let paddleBrightness = useStore(paddleBrightnessSelector)
   let setPaddleBrightness = useStore(setPaddleBrightnessSelector)
+
+  const setGlowVals = useStore(setGlowValsSelector);
+  const glowVals = useStore(glowValsSelector)
+
 
   const gameVariables = useStore(gameVariablesSelector)
   const speedMultiplier = useStore(speedMultiplierSelector)
@@ -92,6 +97,11 @@ export default function GameState() {
         ball.current.position.y = Math.max(-ballBounds, Math.min(ballBounds, ball.current.position.y + positionDelta * svy));
         enemy.current.position.x = ball.current.position.x
         enemy.current.position.y = ball.current.position.y
+
+
+        let lightGrid = Array(10).fill(0.5);
+        lightGrid[Math.abs(Math.round(ball.current.position.z))] = 5
+        setGlowVals(lightGrid)
     }
     if (paddle.current){
         paddle.current.position.x = pointer.x*2;
