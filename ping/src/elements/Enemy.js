@@ -8,7 +8,7 @@ function Enemy(props) {
     const texture = useLoader(TextureLoader, './textures/enemy.png')
 
     let enemy = useStore((s) => s.enemy)
-    let enemyBrightness = useStore((s)=> s.enemyBrightness)
+    // let enemyBrightness = useStore((s)=> s.enemyBrightness) TODO
     let gameInfo = useStore((s) => s.gameVariables)
 
 
