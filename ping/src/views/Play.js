@@ -3,11 +3,12 @@ import './play.css';
 import { mobileCheck, useStore } from '../state/useStore'
 
 const setOverlaySelector = s => s.setOverlay
+const currentScoreSelector = s => s.currentScore
 
-//Component for a roll, its price, and options, as would be shown on the products page
 function PlayScreen(){
   const setOverlay = useStore(setOverlaySelector)
 
+  const currentScore = useStore(currentScoreSelector)
   const escapePressed = (event) =>{
     if (event.key === 'Escape') {
       setOverlay('paused')
@@ -23,7 +24,8 @@ function PlayScreen(){
 
   return (
       <div id="playScreen">
-      <button className='shortBox thinBox pauseMargin' onClick={() => setOverlay('paused')}>{mobileCheck() ? "PAUSE" :"PAUSE (ESC)"}</button>
+        <button className='shortBox thinBox pauseMargin' onClick={() => setOverlay('paused')}>{mobileCheck() ? "PAUSE" :"PAUSE (ESC)"}</button>
+        <span className='scoreDisplay'>{currentScore}</span>
       </div>
   ) 
 }

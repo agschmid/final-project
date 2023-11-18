@@ -8,11 +8,12 @@ const useStore = create((set, get) => {
     ball: createRef(),
     prism: createRef(),
     glowSquares: Array(10).fill(createRef()),
-    glowVals: Array(10).fill(1),
+    glowVals: Array(10).fill(0.5),
     overlay: 'home',
     gamePlaying: false,
     paddleBrightness: 0,
     enemyBrightness: 0,
+    currentScore: 0,
     speedMultiplier: 5,
     gameVariables: {gameWidth: 5, gameLength: 10, ballRadius: 0.5, paddleWidth: 1, enemyWidth: 1},
     setGamePlaying: (gamePlaying) => set(state => ({ gamePlaying: gamePlaying })),
@@ -21,6 +22,7 @@ const useStore = create((set, get) => {
     setSpeedMultiplier: (speedMultiplier) => set(state => ({ speedMultiplier: speedMultiplier })),
     setPaddleBrightness: (paddleBrightness) => set(state => ({ paddleBrightness: paddleBrightness })),
     setEnemyBrightness: (enemyBrightness) => set(state => ({ enemyBrightness: enemyBrightness })),
+    setCurrentScore: (currentScore) => set(state => ({ currentScore: currentScore })),
   }
 })
 

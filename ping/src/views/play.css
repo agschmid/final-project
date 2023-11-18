@@ -2,8 +2,16 @@
     width: 100%;
     height: 100%;
     display: flex;
+    justify-content: space-between;
 }
 
 .pauseMargin{
     margin: 30px
+}
+
+.scoreDisplay{
+    color:white;
+    font-size: 500%;
+    margin: 30px;
+    height: 100px;
 }

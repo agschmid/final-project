@@ -20,6 +20,7 @@ import Enemy from './elements/Enemy.js';
 import Prism from './elements/Prism.js';
 import GameState from './GameState';
 import GlowGrid from './elements/GlowGrid';
+import EndScreen from './views/End';
 
 
 const playingSelector = s => s.gamePlaying
@@ -56,6 +57,9 @@ function Screen() {
         case 'customize':
             screenOverlay = <CustomizeScreen></CustomizeScreen>;
             break
+        case 'end':
+            screenOverlay = <EndScreen></EndScreen>;
+            break
         case 'confirm':
             screenOverlay = <ConfirmScreen></ConfirmScreen>;
             break
@@ -76,10 +80,10 @@ function Screen() {
                 <Ball position={[0, 0, -0.5]}></Ball>
                 <Paddle position={[0,0,0]}></Paddle>
                 <Enemy></Enemy>
-                <Prism  ></Prism>
-                <GlowGrid></GlowGrid>
-                <Background></Background>
             </>}
+            <Prism ></Prism>
+            <GlowGrid></GlowGrid>
+            <Background></Background>
             <GameState></GameState>
 
             <EffectComposer>

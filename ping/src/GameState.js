@@ -16,11 +16,16 @@ const gameVariablesSelector = s => s.gameVariables
 const setSpeedMultiplierSelector = s => s.setSpeedMultiplier
 const speedMultiplierSelector = s => s.speedMultiplier
 const setGlowValsSelector = s => s.setGlowVals
-const glowValsSelector = s => s.glowVals
+const setOverlaySelector = s => s.setOverlay
+const setGamePlayingSelector = s => s.setGamePlaying
+const currentScoreSelector = s => s.currentScore
+const setCurrentScoreSelector = s => s.setCurrentScore
+
+
 
 let svx=0
 let svy=0 //TODO check best way to set velocity
-let svz = 1
+let svz = -1
 
 
 export default function GameState() {
@@ -29,12 +34,16 @@ export default function GameState() {
   const enemy = useStore(enemySelector)
   const gamePlaying = useStore(playingSelector)
   const overlay = useStore(overlaySelector)
+  const setOverlay = useStore(setOverlaySelector)
+  const setGamePlaying = useStore(setGamePlayingSelector)
+
+  const currentScore = useStore(currentScoreSelector)
+  const setCurrentScore = useStore(setCurrentScoreSelector)
+
   let paddleBrightness = useStore(paddleBrightnessSelector)
   let setPaddleBrightness = useStore(setPaddleBrightnessSelector)
 
   const setGlowVals = useStore(setGlowValsSelector);
-  const glowVals = useStore(glowValsSelector)
-
 
   const gameVariables = useStore(gameVariablesSelector)
   const speedMultiplier = useStore(speedMultiplierSelector)
@@ -63,12 +72,15 @@ export default function GameState() {
         if (Math.abs(ball.current.position.y)>=ballBounds){
             svy = -svy
         }
-        if (ball.current.position.z >= -ballRadius || ball.current.position.z <= -gameLength){
+        if (ball.current.position.z <= -gameLength){
             svz = -svz
-            setSpeedMultiplier(speedMultiplier+0.5)
+            if (speedMultiplier<=30) {setSpeedMultiplier(speedMultiplier+0.5)}
         }
 
-        if (ball.current.position.z>= -ballRadius){
+        const positionDelta = speedMultiplier * delta;
+
+
+        if (ball.current.position.z<=-ballRadius && ball.current.position.z>=-ballRadius-positionDelta*svz){
             const xDif = paddle.current.position.x-ball.current.position.x
             const yDif = paddle.current.position.y-ball.current.position.y
             const a=Math.abs(xDif)
@@ -80,28 +92,34 @@ export default function GameState() {
                 let vScale = (1 / (alpha**2 + beta**2 + 1))**0.5
                 svx = -Math.sign(xDif)*vScale*alpha
                 svy = -Math.sign(yDif)*vScale*beta
-                svz = ((svz>=0) ? 1 : -1)*vScale
+                svz = -1*vScale
                 setPaddleBrightness(0.5)
-            } else {
-                svz=0
-                svx=0
-                svy=0
-                setSpeedMultiplier(5)
+                setCurrentScore(currentScore+1)
             }
         }
 
-        const positionDelta = speedMultiplier * delta;
+        if (ball.current.position.z>2){
+            svx=0
+            svy=0
+            svz=-1
+            setSpeedMultiplier(5)
+            setGamePlaying(false)
+            setOverlay('end')
+        }
+
         
-        ball.current.position.z = Math.max(-gameLength, Math.min(-ballRadius, ball.current.position.z + positionDelta * svz));
+        ball.current.position.z = Math.max(-gameLength, ball.current.position.z + positionDelta * svz);
         ball.current.position.x = Math.max(-ballBounds, Math.min(ballBounds, ball.current.position.x + positionDelta * svx));
         ball.current.position.y = Math.max(-ballBounds, Math.min(ballBounds, ball.current.position.y + positionDelta * svy));
         enemy.current.position.x = ball.current.position.x
         enemy.current.position.y = ball.current.position.y
 
+        if (ball.current.position.z<0) {
+            let lightGrid = Array(10).fill(0.5);
+            lightGrid[Math.abs(Math.round(ball.current.position.z))-1] = 5
+            setGlowVals(lightGrid)
+        }
 
-        let lightGrid = Array(10).fill(0.5);
-        lightGrid[Math.abs(Math.round(ball.current.position.z))] = 5
-        setGlowVals(lightGrid)
     }
     if (paddle.current){
         paddle.current.position.x = pointer.x*2;
