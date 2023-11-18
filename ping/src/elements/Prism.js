@@ -1,17 +1,9 @@
 import React from 'react'
-import * as THREE from 'three'
-import {useLoader} from '@react-three/fiber'
-import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { useStore } from '../state/useStore'
+import {GradientTexture} from '@react-three/drei'
 
 
 function Prism(props) {
-  const grid = useLoader(TextureLoader, './textures/grid-pink.png')
-  grid.wrapS = THREE.RepeatWrapping;
-  grid.wrapT = THREE.RepeatWrapping;
-  grid.offset.set( 0, 0 );
-  grid.repeat.set( 5, 5 );
-
   let prism = useStore((s) => s.prism)
   let gameInfo = useStore((s) => s.gameVariables)
 
@@ -24,10 +16,14 @@ function Prism(props) {
       rotation={[Math.PI/2,-Math.PI/2,0]}
       >
       <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
-      <meshStandardMaterial 
-        receiveShadow 
-        map={grid}
-      />
+      <meshBasicMaterial>
+      receiveShadow
+        <GradientTexture
+          stops={[1,0]} // As many stops as you want
+          colors={['#591E56', '#090060']} // Colors need to match the number of stops
+          size={1024} // Size is optional, default = 1024
+         />
+      </meshBasicMaterial>
     </mesh>
     <mesh
     {...props}
@@ -36,10 +32,14 @@ function Prism(props) {
     >
     <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
     {/* <boxGeometry args={[5, 5, 20]} /> */}
-    <meshStandardMaterial 
-      receiveShadow 
-      map={grid}
-    />
+    <meshBasicMaterial>
+    receiveShadow
+        <GradientTexture
+          stops={[0, 1]} // As many stops as you want
+          colors={['#591E56', '#090060']} // Colors need to match the number of stops
+          size={1024} // Size is optional, default = 1024
+         />
+      </meshBasicMaterial>
   </mesh>
   <mesh
       {...props}
@@ -47,10 +47,14 @@ function Prism(props) {
       rotation={[Math.PI/2,0,0]}
       >
       <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
-      <meshStandardMaterial 
-        receiveShadow 
-        map={grid}
-      />
+      <meshBasicMaterial>
+      receiveShadow
+        <GradientTexture
+          stops={[0, 1]} // As many stops as you want
+          colors={['#271446', '#090060']} // Colors need to match the number of stops
+          size={1024} // Size is optional, default = 1024
+         />
+      </meshBasicMaterial>
     </mesh>
     <mesh
     {...props}
@@ -58,10 +62,14 @@ function Prism(props) {
     rotation={[-Math.PI/2,0,0]}
     >
     <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
-    <meshStandardMaterial 
-      receiveShadow 
-      map={grid}
-    />
+    <meshBasicMaterial>
+      receiveShadow
+        <GradientTexture
+          stops={[0, 1]} // As many stops as you want
+          colors={['#BE26CF', '#2F0C4E']} // Colors need to match the number of stops
+          size={1024} // Size is optional, default = 1024
+         />
+      </meshBasicMaterial>
   </mesh>
   </mesh>
   )
