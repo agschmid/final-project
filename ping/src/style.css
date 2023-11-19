@@ -54,12 +54,20 @@ button {
     pointer-events: auto;
 }
 
+
+button:focus {
+    outline: 3px solid white;
+}
+
 button:active {
     border-right: 3px solid rgba(255, 255, 255, .2);
     border-bottom: 3px solid rgba(255, 255, 255, .2);
     border-left: 3px solid rgba(0, 0, 0, .2);
     border-top: 3px solid rgba(0, 0, 0, .2);
+    outline: 1px solid black;
 }
+
+
 
 .bigFont {
     font-size: 250%;

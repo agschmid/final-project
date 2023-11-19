@@ -85,7 +85,6 @@ function Screen() {
             <GlowGrid></GlowGrid>
             <Background></Background>
             <GameState></GameState>
-
             <EffectComposer>
                 <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} intensity={1} />
             </EffectComposer>

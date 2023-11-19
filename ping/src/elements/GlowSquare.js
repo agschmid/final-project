@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { useStore } from '../state/useStore'
 
 
-function GlowSquare(props) {
-  let ref=useStore((s) => s.glowSquares[props.z])
+const GlowSquare = forwardRef(function(props, ref) {
   let gameInfo = useStore((s) => s.gameVariables)
   const delta = 0.01
   return (
@@ -57,6 +56,6 @@ function GlowSquare(props) {
   </mesh>
   </mesh>
   )
-}
+})
 
 export default GlowSquare;
