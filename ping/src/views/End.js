@@ -22,7 +22,7 @@ function EndScreen(){
        <div id="endScreen">
         <span >SCORE: {currentScore}</span>
         <span className='bottomMargin'>HIGHSCORE: {highScore}</span>
-        <button className='shortBox thinBox red bottomMargin' onClick={() => setOverlay('confirm')}>EXIT GAME</button>
+        <button className='shortBox thinBox red bottomMargin' onClick={() => setOverlay('home')}>EXIT GAME</button>
         <button className='shortBox colorful' onClick={() => setOverlay('customize')}>customize visuals</button>
         <button className='bottomMargin' onClick={() => setOverlay('accessibility')}>accessibility & <br></br> controls</button>
         <button className='bigFont green' onClick={function (){setOverlay('countdown');setGamePlaying(true);setCurrentScore(0);}}>PLAY</button>
