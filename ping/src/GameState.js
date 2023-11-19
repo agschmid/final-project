@@ -20,6 +20,8 @@ const setOverlaySelector = s => s.setOverlay
 const setGamePlayingSelector = s => s.setGamePlaying
 const currentScoreSelector = s => s.currentScore
 const setCurrentScoreSelector = s => s.setCurrentScore
+const highScoreSelector = s => s.highScore
+const setHighScoreSelector = s => s.setHighScore
 
 
 
@@ -36,6 +38,8 @@ export default function GameState() {
   const overlay = useStore(overlaySelector)
   const setOverlay = useStore(setOverlaySelector)
   const setGamePlaying = useStore(setGamePlayingSelector)
+  const highScore = useStore(highScoreSelector)
+  const setHighScore = useStore(setHighScoreSelector)
 
   const currentScore = useStore(currentScoreSelector)
   const setCurrentScore = useStore(setCurrentScoreSelector)
@@ -102,6 +106,7 @@ export default function GameState() {
             svx=0
             svy=0
             svz=-1
+            if (currentScore>highScore){ setHighScore(currentScore)}
             setSpeedMultiplier(5)
             setGamePlaying(false)
             setOverlay('end')

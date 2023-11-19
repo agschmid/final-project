@@ -8,6 +8,7 @@ const setGamePlayingSelector = s => s.setGamePlaying
 const currentScoreSelector = s => s.currentScore
 const setCurrentScoreSelector = s => s.setCurrentScore
 
+const highScoreSelector = s => s.highScore
 
 //Component for a roll, its price, and options, as would be shown on the products page
 function EndScreen(){
@@ -15,11 +16,12 @@ function EndScreen(){
     const setGamePlaying = useStore(setGamePlayingSelector)
     const currentScore = useStore(currentScoreSelector)
     const setCurrentScore = useStore(setCurrentScoreSelector)
+    const highScore = useStore(highScoreSelector)
 
     return (
        <div id="endScreen">
-        <span>SCORE: {currentScore}</span>
-        <span className='bottomMargin'>HIGHSCORE: {10}</span>
+        <span >SCORE: {currentScore}</span>
+        <span className='bottomMargin'>HIGHSCORE: {highScore}</span>
         <button className='shortBox thinBox red bottomMargin' onClick={() => setOverlay('confirm')}>EXIT GAME</button>
         <button className='shortBox colorful' onClick={() => setOverlay('customize')}>customize visuals</button>
         <button className='bottomMargin' onClick={() => setOverlay('accessibility')}>accessibility & <br></br> controls</button>
