@@ -2,45 +2,42 @@ import React, { useEffect, useState } from "react";
 
 import { useStore } from './state/useStore'
 
-
-const paddlePositionSelector = s => s.paddlePosition
 const setPaddlePositionSelector = s => s.setPaddlePosition
 
 
 
 // https://codesandbox.io/examples/package/react-accelerometer
+// TODO: Freaks out when phone is past upright
 function Accelerometer() {
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const paddlePosition = useStore(paddlePositionSelector)
-  const setPaddlePosition = useStore(setPaddlePositionSelector)
-
+  const setPaddlePosition = useStore(setPaddlePositionSelector);
+  
+  const [center, setCenter] = useState({x:0, y:0})
 
   function handleMotionEvent(event) {
-    // let rotation_degrees = event.alpha;
     let frontToBack_degrees = event.beta;
     let leftToRight_degrees = event.gamma;
-
-    // Update velocity according to how tilted the phone is
-    let vx = paddlePosition.vx + leftToRight_degrees * 60; 
-    let vy = paddlePosition.vy + frontToBack_degrees * 60;
-
-    // Update position and clip it to bounds
-    let px = paddlePosition.x + vx*.01;
-    if (px > 2 || px < -2){ 
-        px = Math.max(-2, Math.min(2, px)) // Clip px between 0-98
-        vx = 0;
-    }
-
-    let py = paddlePosition.y - vy*.01;
-    if (py > 2 || py < -2){
-        py = Math.max(-2, Math.min(2, py)) // Clip py between 0-98
-        vy = 0;
-    }
-
-    setPaddlePosition({x: px, y: py, vx: vx, vy: vy})
-    // setX(event.accelerationIncludingGravity.x);
-    // setY(event.accelerationIncludingGravity.y);
-    // setZ(event.accelerationIncludingGravity.z);
+  
+    setCenter((prevCenter) => {
+      let xCenter = prevCenter.x;
+      let yCenter = prevCenter.y;
+  
+      // Update position and clip it to bounds
+      let px = (leftToRight_degrees - xCenter) * 0.1;
+      if (px > 2 || px < -2) {
+        px = Math.max(-2, Math.min(2, px));
+        xCenter = leftToRight_degrees - Math.sign(leftToRight_degrees-xCenter) * 20;      
+      }
+  
+      let py = (-frontToBack_degrees + yCenter) * 0.1;
+      if (py > 2 || py < -2) {
+        py = Math.max(-2, Math.min(2, py));
+        yCenter = frontToBack_degrees - Math.sign(frontToBack_degrees-yCenter) * 20;
+      }
+  
+      setPaddlePosition({ x: px, y: py });
+      return { x: xCenter, y: yCenter }; 
+    });
   }
 
 
@@ -79,12 +76,10 @@ function Accelerometer() {
       .catch(console.error);
   }
 
-  return (
+  return ( //TODO INcoprorate this menu with my other ones
     <>
       {permissionGranted ? (
-        <div>
-            position: {paddlePosition.x} {paddlePosition.y}
-        </div>
+        <></>
       ) : (
         <div className="modal" id="modal">
           <div className="modal-content">

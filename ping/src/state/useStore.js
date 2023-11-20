@@ -15,7 +15,7 @@ const useStore = create((set, get) => {
     enemyBrightness: 0,
     currentScore: 0,
     speedMultiplier: 5,
-    paddlePosition: {x: 0, y: 0, vx: 0, vy: 0},
+    paddlePosition: {x: 0, y:0, xCenter: 0, yCenter: 0},
     controlScheme: 'touch', 
     highScore : JSON.parse(localStorage.getItem("pingHighScore")) || 0,
     gameVariables: {gameWidth: 5, gameLength: 10, ballRadius: 0.5, paddleWidth: 1, enemyWidth: 1},
