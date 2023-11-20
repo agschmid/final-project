@@ -2,7 +2,6 @@
 // TODO: take a bunch of the general game logic from this one
 
 import { useFrame } from '@react-three/fiber'
-
 import { useStore } from './state/useStore'
 
 const ballSelector = s => s.ball
@@ -22,6 +21,7 @@ const currentScoreSelector = s => s.currentScore
 const setCurrentScoreSelector = s => s.setCurrentScore
 const highScoreSelector = s => s.highScore
 const setHighScoreSelector = s => s.setHighScore
+const paddlePositionSelector = s => s.paddlePosition
 
 
 
@@ -40,6 +40,8 @@ export default function GameState() {
   const setGamePlaying = useStore(setGamePlayingSelector)
   const highScore = useStore(highScoreSelector)
   const setHighScore = useStore(setHighScoreSelector)
+  const paddlePosition = useStore(paddlePositionSelector)
+
 
   const currentScore = useStore(currentScoreSelector)
   const setCurrentScore = useStore(setCurrentScoreSelector)
@@ -127,8 +129,8 @@ export default function GameState() {
 
     }
     if (paddle.current){
-        paddle.current.position.x = pointer.x*2;
-        paddle.current.position.y = pointer.y*2;
+        paddle.current.position.x = paddlePosition.x;
+        paddle.current.position.y = paddlePosition.y;
     }
   })
 

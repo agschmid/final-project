@@ -22,6 +22,8 @@ import GameState from './GameState';
 import GlowGrid from './elements/GlowGrid';
 import EndScreen from './views/End';
 
+import Accelerometer from './Accelerometer.js'
+
 
 const playingSelector = s => s.gamePlaying
 const overlaySelector = s => s.overlay
@@ -71,6 +73,7 @@ function Screen() {
 
     return (
         <>
+        <Accelerometer></Accelerometer>
         <Canvas camera={{ fov: 80, position: [0,0,2]}} style={canvasStyle} >
             <ambientLight intensity={0.5} />
             <directionalLight position={[0.5, 0.5, 4]} />
@@ -80,6 +83,7 @@ function Screen() {
                 <Ball position={[0, 0, -0.5]}></Ball>
                 <Paddle position={[0,0,0]}></Paddle>
                 <Enemy></Enemy>
+
             </>}
             <Prism ></Prism>
             <GlowGrid></GlowGrid>
