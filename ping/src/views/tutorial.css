@@ -1,0 +1,94 @@
+#tutorialScreen{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tutorialParent{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.tutorialHome{
+    display: flex;
+    height: 10%;
+    width: 100%;
+    align-items: left;
+}
+
+.tutVid{
+    width: 100%;
+}
+
+.tutorialScreen{
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    font-size: 150%;
+    font-family: "VT323";
+}
+
+.tutorialImage{
+    width: 100%;
+}
+
+.progress{
+    width: 20%;
+    margin: 2px;
+    height: 15px;
+}
+
+.filled{
+    background-color: darkblue;
+}
+
+.progressParent{
+    display: flex;
+}
+
+.tutorialText{
+    height: 80px;
+}
+
+.tutorialContent{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tutorialButtons{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.tutorialButtonsSingle{
+    justify-content: right;
+}
+
+.playButton{
+    width: 100%;
+}
+
+.shadedBox{
+    outline: 1px solid black;
+    background-color: #BFBFBF;
+    color:black;
+    border-left: 3px solid rgba(255, 255, 255, .2);
+    border-top: 3px solid rgba(255, 255, 255, .2);
+    border-right: 3px solid rgba(0, 0, 0, .2);
+    border-bottom: 3px solid rgba(0, 0, 0, .2);
+    pointer-events: auto;
+}

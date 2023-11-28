@@ -13,7 +13,7 @@ var drum = new Howl({
 
 var hit = new Howl({
     preload:true,
-    volume: 0.05,
+    volume: 0.2,
     src: ['hit.wav'],
 });
 

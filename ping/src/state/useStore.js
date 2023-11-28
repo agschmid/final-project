@@ -9,7 +9,7 @@ const useStore = create((set, get) => {
     prism: createRef(),
     glowSquares: Array(10).fill(createRef()),
     glowVals: Array(10).fill(0.5),
-    overlay: 'home',
+    overlay: 'tutorial',
     gamePlaying: false,
     paddleBrightness: 0,
     enemyBrightness: 0,

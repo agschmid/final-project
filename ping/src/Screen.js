@@ -13,6 +13,8 @@ import HomeScreen from './views/Home.js';
 import CountdownScreen from './views/Countdown';
 import PauseScreen from './views/Pause.js';
 import ConfirmScreen from './views/Confirm.js';
+import TutorialScreen from './views/Tutorial.js';
+
 
 import Background from './elements/Background.js';
 import Ball from './elements/Ball.js';
@@ -89,6 +91,9 @@ function Screen() {
             break
         case 'confirm':
             screenOverlay = <ConfirmScreen></ConfirmScreen>;
+            break
+        case 'tutorial':
+            screenOverlay = <TutorialScreen playSound = {playMusic}></TutorialScreen>;
             break
         default:
             screenOverlay = <div>A screen overlay has been request that doesn't exist... oops</div>;
