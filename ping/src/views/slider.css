@@ -1,0 +1,53 @@
+.slidecontainer {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    outline: 1px solid black;
+    background-color: #BFBFBF;
+    padding: 5px;
+    font-size: 100%;
+    font-family: "VT323";
+    color:black;
+    border-left: 3px solid rgba(255, 255, 255, .2);
+    border-top: 3px solid rgba(255, 255, 255, .2);
+    border-right: 3px solid rgba(0, 0, 0, .2);
+    border-bottom: 3px solid rgba(0, 0, 0, .2);
+    width: 220px;
+    pointer-events: auto;
+}
+  
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 2px; /* Specified height */
+    background: #333; /* Grey background */
+    border: 1px solid #666;
+    border-bottom: 1px solid #fff;
+    outline: none; /* Remove outline */
+    margin: 20px;
+}
+
+
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 13px;
+    height: 25px;
+    border: 0;
+    background: url('data:image/svg+xml,<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1035.05 1980.19"><defs><style> .cls-1 { fill: %23d5d1c8; } .cls-2 { fill: %23fff; opacity: .68; } .cls-3 { fill: %23231f20; opacity: .89; } </style></defs><polygon class="cls-1" points="0 0 0 1461.57 516.43 1980.19 1035.05 1461.57 1035.05 0 0 0"/><polygon class="cls-3" points="1035.05 0 940.22 94.82 940.22 1422.29 517.52 1844.99 517.52 1979.09 1035.05 1461.57 1035.05 0"/><polyline class="cls-2" points="1035.05 0 0 0 0 1461.57 516.43 1980.19 517.52 1979.09 517.52 1844.99 516.57 1845.94 94.82 1422.41 94.82 94.82 517.52 94.82 940.22 94.82"/></svg>');
+    cursor: pointer;
+}
+  
+.slider::-moz-range-thumb {
+    width: 13px;
+    height: 25px;
+    border: 0;
+    background: url('data:image/svg+xml,<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1035.05 1980.19"><defs><style> .cls-1 { fill: %23d5d1c8; } .cls-2 { fill: %23fff; opacity: .68; } .cls-3 { fill: %23231f20; opacity: .89; } </style></defs><polygon class="cls-1" points="0 0 0 1461.57 516.43 1980.19 1035.05 1461.57 1035.05 0 0 0"/><polygon class="cls-3" points="1035.05 0 940.22 94.82 940.22 1422.29 517.52 1844.99 517.52 1979.09 1035.05 1461.57 1035.05 0"/><polyline class="cls-2" points="1035.05 0 0 0 0 1461.57 516.43 1980.19 517.52 1979.09 517.52 1844.99 516.57 1845.94 94.82 1422.41 94.82 94.82 517.52 94.82 940.22 94.82"/></svg>');
+    cursor: pointer;
+}
+

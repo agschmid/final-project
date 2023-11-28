@@ -3,6 +3,19 @@
 
 import { useFrame } from '@react-three/fiber'
 import { useStore } from './state/useStore'
+import {Howl} from 'howler';
+
+
+var drum = new Howl({
+    preload:true,
+    src: ['stab.wav'],
+});
+
+var hit = new Howl({
+    preload:true,
+    volume: 0.05,
+    src: ['hit.wav'],
+});
 
 const ballSelector = s => s.ball
 const paddleSelector = s => s.paddle
@@ -15,13 +28,13 @@ const gameVariablesSelector = s => s.gameVariables
 const setSpeedMultiplierSelector = s => s.setSpeedMultiplier
 const speedMultiplierSelector = s => s.speedMultiplier
 const setGlowValsSelector = s => s.setGlowVals
+const glowValsSelector = s => s.glowVals
 const setOverlaySelector = s => s.setOverlay
 const setGamePlayingSelector = s => s.setGamePlaying
 const currentScoreSelector = s => s.currentScore
 const setCurrentScoreSelector = s => s.setCurrentScore
 const highScoreSelector = s => s.highScore
 const setHighScoreSelector = s => s.setHighScore
-const paddlePositionSelector = s => s.paddlePosition
 
 
 
@@ -31,6 +44,8 @@ let svz = -1
 
 
 export default function GameState() {
+//   const camera = useThree(state => state.camera)
+
   const ball = useStore(ballSelector)
   const paddle = useStore(paddleSelector)
   const enemy = useStore(enemySelector)
@@ -40,8 +55,7 @@ export default function GameState() {
   const setGamePlaying = useStore(setGamePlayingSelector)
   const highScore = useStore(highScoreSelector)
   const setHighScore = useStore(setHighScoreSelector)
-  const paddlePosition = useStore(paddlePositionSelector)
-
+  const glowVals = useStore(glowValsSelector)
 
   const currentScore = useStore(currentScoreSelector)
   const setCurrentScore = useStore(setCurrentScoreSelector)
@@ -100,6 +114,7 @@ export default function GameState() {
                 svy = -Math.sign(yDif)*vScale*beta
                 svz = -1*vScale
                 setPaddleBrightness(0.5)
+                hit.play()
                 setCurrentScore(currentScore+1)
             }
         }
@@ -123,17 +138,22 @@ export default function GameState() {
 
         if (ball.current.position.z<0) {
             let lightGrid = Array(10).fill(0.5);
-            lightGrid[Math.abs(Math.round(ball.current.position.z))-1] = 5
-            setGlowVals(lightGrid)
+            let index = Math.abs(Math.round(ball.current.position.z))-1
+            lightGrid[index] = 5
+            if (! (JSON.stringify(lightGrid) === JSON.stringify(glowVals))){
+                // drum.play()
+                setGlowVals(lightGrid);
+            }
         }
 
     }
     if (paddle.current){
-        paddle.current.position.x = paddlePosition.x;
-        paddle.current.position.y = paddlePosition.y;
+        paddle.current.position.y = pointer.y
+        paddle.current.position.x = pointer.x
     }
   })
 
+  
   return null
 }
 

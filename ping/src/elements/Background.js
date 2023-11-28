@@ -10,9 +10,9 @@ function Background(props) {
     return (
         <mesh
         {...props}
-        position={[0,0,-gameInfo.gameLength]}
+        position={[0,0,-10*gameInfo.gameLength]}
         >
-        <planeGeometry args={[gameInfo.gameLength*0.6865, gameInfo.gameWidth]} />
+        <planeGeometry args={[gameInfo.gameLength*0.6865*10, 10*gameInfo.gameWidth]} />
         <meshStandardMaterial map={texture} side = {'THREE.DoubleSide'}/>
         </mesh>
     )

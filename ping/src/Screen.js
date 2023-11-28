@@ -1,6 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Bloom, EffectComposer} from '@react-three/postprocessing'
+import {Howl} from 'howler';
 
 import { useStore } from './state/useStore'
 import "./style.css" 
@@ -25,24 +26,48 @@ import EndScreen from './views/End';
 import Accelerometer from './Accelerometer.js'
 
 
+
+var song = new Howl({
+    preload:true,
+    src: ['song.wav'],
+    loop:true
+});
+
+
+var opener = new Howl({
+    preload:true,
+    src: ['opener.wav'],
+    onend: function(){
+        song.play()
+    }
+});
+
 const playingSelector = s => s.gamePlaying
 const overlaySelector = s => s.overlay
+const volumeSelector = s => s.volume
 
+
+function playMusic(){
+    if (!song.playing()) opener.play()
+}
 
 function Screen() {
     const overlay = useStore(overlaySelector)
     const gamePlaying = useStore(playingSelector)
+    const volume = useStore(volumeSelector)
+    song.volume(volume/200)
+    opener.volume(volume/200)
     
     let canvasStyle = {
         position: "absolute",
         cursor: (overlay === 'playing') ? "none" : "pointer"
     }
-    
-    // TODO Replace switch?
+
+
     let screenOverlay
     switch(overlay) {
         case 'home':
-            screenOverlay = <HomeScreen></HomeScreen>;
+            screenOverlay = <HomeScreen playSound = {playMusic} ></HomeScreen>;
             break
         case 'countdown':
             screenOverlay = <CountdownScreen></CountdownScreen>;
@@ -78,7 +103,6 @@ function Screen() {
             <ambientLight intensity={0.5} />
             <directionalLight position={[0.5, 0.5, 4]} />
             <directionalLight position={[-0.5, 0.5, 1]} />
-            {/* TODO swap out this with something from GameState */}
             {(gamePlaying) && <> 
                 <Ball position={[0, 0, -0.5]}></Ball>
                 <Paddle position={[0,0,0]}></Paddle>

@@ -17,6 +17,7 @@ const useStore = create((set, get) => {
     speedMultiplier: 5,
     paddlePosition: {x: 0, y:0, xCenter: 0, yCenter: 0},
     controlScheme: 'touch', 
+    volume: 60,
     highScore : JSON.parse(localStorage.getItem("pingHighScore")) || 0,
     gameVariables: {gameWidth: 5, gameLength: 10, ballRadius: 0.5, paddleWidth: 1, enemyWidth: 1},
     setGamePlaying: (gamePlaying) => set(state => ({ gamePlaying: gamePlaying })),
@@ -28,6 +29,7 @@ const useStore = create((set, get) => {
     setPaddleBrightness: (paddleBrightness) => set(state => ({ paddleBrightness: paddleBrightness })),
     setEnemyBrightness: (enemyBrightness) => set(state => ({ enemyBrightness: enemyBrightness })),
     setCurrentScore: (currentScore) => set(state => ({ currentScore: currentScore })),
+    setVolume: (volume) => set(state => ({ volume: volume })),
   }
 })
 

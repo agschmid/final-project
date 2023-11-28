@@ -10,7 +10,7 @@ const highScoreSelector = s => s.highScore
 
 
 //Component for a roll, its price, and options, as would be shown on the products page
-function HomeScreen(){
+function HomeScreen(props){
   const setGamePlaying = useStore(setGamePlayingSelector)
   const setOverlay = useStore(setOverlaySelector)
   const highScore = useStore(highScoreSelector)
@@ -21,7 +21,7 @@ function HomeScreen(){
       <span className='bottomMargin' style={{color: 'white'}}>HIGHSCORE: {highScore}</span>
       <button className='shortBox colorful' onClick={() => setOverlay('customize')}>customize visuals</button>
       <button className='bottomMargin' onClick={() => setOverlay('accessibility')}>accessibility & <br></br> controls</button>
-      <button className='bigFont green' onClick={function(){setOverlay('countdown'); setGamePlaying(true);}}>PLAY GAME</button>
+      <button className='bigFont green' onClick={function(){setOverlay('countdown'); setGamePlaying(true); props.playSound();}}>PLAY GAME</button>
       </div>
   ) 
 }

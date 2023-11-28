@@ -54,11 +54,6 @@ button {
     pointer-events: auto;
 }
 
-
-button:focus {
-    outline: 3px solid white;
-}
-
 button:active {
     border-right: 3px solid rgba(255, 255, 255, .2);
     border-bottom: 3px solid rgba(255, 255, 255, .2);
