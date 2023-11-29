@@ -84,8 +84,10 @@ export default function GameState() {
   let windowWidth, windowHeight
 
   useThree(({ camera }) => {
-    windowWidth = visibleWidthAtZDepth(3, camera)
-    windowHeight = visibleHeightAtZDepth(3, camera)
+    camera.position.z = Math.max(3, (gameWidth/2) / (Math.tan(camera.fov * Math.PI/360) * camera.aspect))
+    console.log(camera.position.z)
+    windowWidth = visibleWidthAtZDepth(camera.position.z, camera)
+    windowHeight = visibleHeightAtZDepth(camera.position.z, camera)
   });
 
   useFrame(({pointer}, delta) => {
@@ -137,6 +139,7 @@ export default function GameState() {
             if (currentScore>highScore){ setHighScore(currentScore)}
             setSpeedMultiplier(5)
             setGamePlaying(false)
+            setCursorStyle('default')
             setOverlay('end')
         }
 

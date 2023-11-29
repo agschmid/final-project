@@ -23,11 +23,11 @@ input:focus {
 }
 
 /* https://stackoverflow.com/questions/54087544/how-to-have-a-css-outline-on-a-button-tag-only-by-tab-but-not-on-click */
-
 input:focus:not(:focus-visible) {
-    outline: 1px solid black;
+    outline: none;
 }
-  
+ 
+
 /* The slider itself */
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
