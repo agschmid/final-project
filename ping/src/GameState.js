@@ -4,6 +4,7 @@
 import { useFrame } from '@react-three/fiber'
 import { useStore } from './state/useStore'
 import {Howl} from 'howler';
+import { useThree } from "@react-three/fiber";
 
 
 var drum = new Howl({
@@ -75,7 +76,12 @@ export default function GameState() {
   const paddleWidth = gameVariables.paddleWidth
   const paddleHeight = paddleWidth
   const ballBounds = gameWidth/2 - ballRadius;
+  let windowWidth, windowHeight
 
+  useThree(({ camera }) => {
+    windowWidth = visibleWidthAtZDepth(3, camera)
+    windowHeight = visibleHeightAtZDepth(3, camera)
+  });
 
   useFrame(({pointer}, delta) => {
     if (gamePlaying && overlay!=='playing'){
@@ -148,8 +154,8 @@ export default function GameState() {
 
     }
     if (paddle.current){
-        paddle.current.position.y = pointer.y
-        paddle.current.position.x = pointer.x
+        paddle.current.position.y = Math.max(Math.min(pointer.y*windowHeight/2, gameWidth/2-paddleWidth/2), -gameWidth/2+paddleWidth/2)
+        paddle.current.position.x = Math.max(Math.min(pointer.x*windowWidth/2, gameWidth/2-paddleWidth/2), -gameWidth/2+paddleWidth/2)
     }
   })
 
@@ -173,3 +179,22 @@ function didPaddleHit(a, b, radius){
     }
 }
 
+
+// https://discourse.threejs.org/t/functions-to-calculate-the-visible-width-height-at-a-given-z-depth-from-a-perspective-camera/269
+const visibleHeightAtZDepth = ( depth, camera ) => {
+    // compensate for cameras not positioned at z=0
+    const cameraOffset = camera.position.z;
+    if ( depth < cameraOffset ) depth -= cameraOffset;
+    else depth += cameraOffset;
+  
+    // vertical fov in radians
+    const vFOV = camera.fov * Math.PI / 180; 
+  
+    // Math.abs to ensure the result is always positive
+    return Math.tan( vFOV / 2 ) * Math.abs( depth );
+};
+  
+const visibleWidthAtZDepth = ( depth, camera ) => {
+    const height = visibleHeightAtZDepth( depth, camera );
+    return height * camera.aspect;
+};
