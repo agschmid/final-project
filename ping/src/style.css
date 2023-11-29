@@ -51,6 +51,7 @@ button {
     height: 60px;
     padding:0px;
     pointer-events: auto;
+    cursor: pointer;
 }
 
 button:active {

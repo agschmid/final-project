@@ -47,6 +47,8 @@ var opener = new Howl({
 const playingSelector = s => s.gamePlaying
 const overlaySelector = s => s.overlay
 const volumeSelector = s => s.volume
+const cursorStyleSelector = s => s.cursorStyle
+
 
 
 function playMusic(){
@@ -56,15 +58,15 @@ function playMusic(){
 function Screen() {
     const overlay = useStore(overlaySelector)
     const gamePlaying = useStore(playingSelector)
+    const cursorStyle = useStore(cursorStyleSelector)
     const volume = useStore(volumeSelector)
     song.volume(volume/200)
     opener.volume(volume/200)
     
     let canvasStyle = {
         position: "absolute",
-        cursor: (overlay === 'playing') ? "none" : "pointer"
+        cursor: cursorStyle
     }
-
 
     let screenOverlay
     switch(overlay) {

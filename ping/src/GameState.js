@@ -19,6 +19,8 @@ var hit = new Howl({
 });
 
 const ballSelector = s => s.ball
+const setCursorStyleSelector = s => s.setCursorStyle
+const cursorStyleSelector = s => s.cursorStyle
 const paddleSelector = s => s.paddle
 const enemySelector = s => s.enemy
 const playingSelector = s => s.gamePlaying
@@ -57,6 +59,9 @@ export default function GameState() {
   const highScore = useStore(highScoreSelector)
   const setHighScore = useStore(setHighScoreSelector)
   const glowVals = useStore(glowValsSelector)
+  const setCursorStyle = useStore(setCursorStyleSelector)
+  const cursorStyle = useStore(cursorStyleSelector)
+
 
   const currentScore = useStore(currentScoreSelector)
   const setCurrentScore = useStore(setCurrentScoreSelector)
@@ -153,9 +158,20 @@ export default function GameState() {
         }
 
     }
+    // TODO This is a mess
     if (paddle.current){
         paddle.current.position.y = Math.max(Math.min(pointer.y*windowHeight/2, gameWidth/2-paddleWidth/2), -gameWidth/2+paddleWidth/2)
         paddle.current.position.x = Math.max(Math.min(pointer.x*windowWidth/2, gameWidth/2-paddleWidth/2), -gameWidth/2+paddleWidth/2)
+        if ((Math.abs(pointer.y*windowHeight/2) < gameWidth/2) && (Math.abs(pointer.x*windowWidth/2) < gameWidth/2) && overlay ==='playing'){
+            if (cursorStyle !== 'none') {
+                setCursorStyle('none')
+            }
+        }
+        else {
+            if (cursorStyle !== 'default') {
+                setCursorStyle('default')
+            }
+        }
     }
   })
 

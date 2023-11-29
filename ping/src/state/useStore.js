@@ -20,6 +20,8 @@ const useStore = create((set, get) => {
     volume: 60,
     highScore : JSON.parse(localStorage.getItem("pingHighScore")) || 0,
     gameVariables: {gameWidth: 5, gameLength: 10, ballRadius: 0.5, paddleWidth: 1, enemyWidth: 1},
+    cursorStyle: 'default',
+    setCursorStyle: (cursorStyle) => set(state => ({ cursorStyle: cursorStyle })),
     setGamePlaying: (gamePlaying) => set(state => ({ gamePlaying: gamePlaying })),
     setPaddlePosition: (paddlePosition) => set(state => ({ paddlePosition: paddlePosition })),
     setHighScore: (highScore) => { set(state => ({ highScore: highScore })); localStorage.setItem("pingHighScore", highScore)},
