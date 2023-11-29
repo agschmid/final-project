@@ -104,7 +104,7 @@ function Screen() {
     return (
         <>
         <Accelerometer></Accelerometer>
-        <Canvas camera={{ fov: 80, position: [0,0,2]}} style={canvasStyle} >
+        <Canvas camera={{ fov: 80, position: [0,0,3]}} style={canvasStyle} >
             <ambientLight intensity={0.5} />
             <directionalLight position={[0.5, 0.5, 4]} />
             <directionalLight position={[-0.5, 0.5, 1]} />
