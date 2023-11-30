@@ -1,12 +1,21 @@
 import React from 'react';
+import { useStore } from '../state/useStore'
+
 import './slider.css';
 
 // import { useStore } from '../state/useStore'
+const setStoredOptionsSelector = s => s.setStoredOptions
+const storedOptionsSelector = s => s.storedOptions
 
 //Component for a roll, its price, and options, as would be shown on the products page
 export default function Slider(props){
+
+  const setStoredOptions = useStore(setStoredOptionsSelector)
+  const storedOptions = useStore(storedOptionsSelector)
+
   const updateSlider = function(event) {
-    props.setSliderVal(event.target.value);
+  if (props.setSliderVal ==='volume')
+    setStoredOptions({...storedOptions, volume: event.target.value});
   }
 
   return (

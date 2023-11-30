@@ -33,8 +33,6 @@ export default function TutorialScreen(props){
   }
 
 
-  console.log(currentTutScreen)
-
   return (
     <>
     <div className = "tutorialHome">

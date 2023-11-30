@@ -25,7 +25,6 @@ import GameState from './GameState';
 import GlowGrid from './elements/GlowGrid';
 import EndScreen from './views/End';
 
-import Accelerometer from './Accelerometer.js'
 
 
 
@@ -46,10 +45,10 @@ var opener = new Howl({
 
 const playingSelector = s => s.gamePlaying
 const overlaySelector = s => s.overlay
-const volumeSelector = s => s.volume
 const cursorStyleSelector = s => s.cursorStyle
 
-
+const setStoredOptionsSelector  = s => s.setStoredOptions
+const storedOptionsSelector  = s => s.storedOptions
 
 function playMusic(){
     if (!song.playing()) opener.play()
@@ -59,7 +58,15 @@ function Screen() {
     const overlay = useStore(overlaySelector)
     const gamePlaying = useStore(playingSelector)
     const cursorStyle = useStore(cursorStyleSelector)
-    const volume = useStore(volumeSelector)
+    const storedOptions = useStore(storedOptionsSelector)
+    const setStoredOptions = useStore(setStoredOptionsSelector)
+
+
+    const volume = storedOptions.volume
+
+
+
+
     song.volume(volume/200)
     opener.volume(volume/200)
     
@@ -105,7 +112,6 @@ function Screen() {
 
     return (
         <>
-        <Accelerometer></Accelerometer>
         <Canvas camera={{ fov: 80, position: [0,0,3]}} style={canvasStyle} >
             <ambientLight intensity={0.5} />
             <directionalLight position={[0.5, 0.5, 4]} />

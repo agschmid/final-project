@@ -5,8 +5,7 @@ import Slider from './Slider';
 
 const playingSelector = s => s.gamePlaying
 const setOverlaySelector = s => s.setOverlay
-const setVolumeSelector = s => s.setVolume
-const volumeSelector = s => s.volume
+const storedOptionsSelector = s => s.storedOptions
 
 
 
@@ -14,14 +13,13 @@ const volumeSelector = s => s.volume
 function AccessibilityScreen(){
   const gamePlaying = useStore(playingSelector)
   const setOverlay = useStore(setOverlaySelector)
-  const setVolume = useStore(setVolumeSelector)
-  const volume = useStore(volumeSelector)
+  const storedOptions = useStore(storedOptionsSelector)
 
   return (
     <div id="accessibilityScreen">
       <button className='shortBox'>speed slider</button>
       <button className='shortBox'>size slider</button>
-      <Slider setSliderVal={setVolume} sliderVal = {volume}></Slider>
+      <Slider setSliderVal={'volume'} sliderVal = {storedOptions.volume}></Slider>
       <button className='bigFont green' onClick={() => {gamePlaying ? setOverlay('paused') : setOverlay('home');}}>RETURN</button>
     </div>
   ) 

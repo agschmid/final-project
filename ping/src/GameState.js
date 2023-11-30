@@ -85,7 +85,6 @@ export default function GameState() {
 
   useThree(({ camera }) => {
     camera.position.z = Math.max(3, (gameWidth/2) / (Math.tan(camera.fov * Math.PI/360) * camera.aspect))
-    console.log(camera.position.z)
     windowWidth = visibleWidthAtZDepth(camera.position.z, camera)
     windowHeight = visibleHeightAtZDepth(camera.position.z, camera)
   });
