@@ -1,5 +1,5 @@
 import {React, useEffect} from 'react';
-import './play.css';
+import './views-css/play.css';
 import { mobileCheck, useStore } from '../state/useStore'
 
 const setOverlaySelector = s => s.setOverlay

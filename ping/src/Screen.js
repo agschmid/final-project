@@ -7,7 +7,6 @@ import { useStore } from './state/useStore'
 import "./style.css" 
 
 import PlayScreen from './views/Play.js';
-import CustomizeScreen from './views/Customize.js';
 import AccessibilityScreen from './views/Accessibility.js';
 import HomeScreen from './views/Home.js';
 import CountdownScreen from './views/Countdown';
@@ -21,23 +20,21 @@ import Ball from './elements/Ball.js';
 import Paddle from './elements/Paddle.js';
 import Enemy from './elements/Enemy.js';
 import Prism from './elements/Prism.js';
-import GameState from './GameState';
+import GameState from './state/GameState.js';
 import GlowGrid from './elements/GlowGrid';
 import EndScreen from './views/End';
 
 
-
-
 var song = new Howl({
     preload:true,
-    src: ['song.wav'],
+    src: ['./audio/song.wav'],
     loop:true
 });
 
 
 var opener = new Howl({
     preload:true,
-    src: ['opener.wav'],
+    src: ['./audio/opener.wav'],
     onend: function(){
         song.play()
     }
@@ -47,11 +44,18 @@ const playingSelector = s => s.gamePlaying
 const overlaySelector = s => s.overlay
 const cursorStyleSelector = s => s.cursorStyle
 
-const setStoredOptionsSelector  = s => s.setStoredOptions
+
+// const setStoredOptionsSelector  = s => s.setStoredOptions
 const storedOptionsSelector  = s => s.storedOptions
 
-function playMusic(){
-    if (!song.playing()) opener.play()
+
+function toggleMusic(){
+    if (opener.playing()){
+        opener.stop()
+    } else{
+        song.playing() ? song.stop() : opener.play();
+    }
+
 }
 
 function Screen() {
@@ -59,7 +63,7 @@ function Screen() {
     const gamePlaying = useStore(playingSelector)
     const cursorStyle = useStore(cursorStyleSelector)
     const storedOptions = useStore(storedOptionsSelector)
-    const setStoredOptions = useStore(setStoredOptionsSelector)
+    // const setStoredOptions = useStore(setStoredOptionsSelector)
 
 
     const volume = storedOptions.volume
@@ -78,7 +82,7 @@ function Screen() {
     let screenOverlay
     switch(overlay) {
         case 'home':
-            screenOverlay = <HomeScreen playSound = {playMusic} ></HomeScreen>;
+            screenOverlay = <HomeScreen toggleSound = {toggleMusic} ></HomeScreen>;
             break
         case 'countdown':
             screenOverlay = <CountdownScreen></CountdownScreen>;
@@ -87,14 +91,14 @@ function Screen() {
             screenOverlay = <PlayScreen></PlayScreen>;
             break
         case 'paused':
-            screenOverlay = <PauseScreen></PauseScreen>;
+            screenOverlay = <PauseScreen toggleSound = {toggleMusic}></PauseScreen>;
             break
         case 'accessibility':
             screenOverlay = <AccessibilityScreen></AccessibilityScreen>;
             break
-        case 'customize':
-            screenOverlay = <CustomizeScreen></CustomizeScreen>;
-            break
+        // case 'customize':
+        //     screenOverlay = <CustomizeScreen></CustomizeScreen>;
+        //     break
         case 'end':
             screenOverlay = <EndScreen></EndScreen>;
             break
@@ -102,7 +106,7 @@ function Screen() {
             screenOverlay = <ConfirmScreen></ConfirmScreen>;
             break
         case 'tutorial':
-            screenOverlay = <TutorialScreen playSound = {playMusic}></TutorialScreen>;
+            screenOverlay = <TutorialScreen></TutorialScreen>;
             break
         default:
             screenOverlay = <div>A screen overlay has been request that doesn't exist... oops</div>;

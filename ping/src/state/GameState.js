@@ -2,21 +2,9 @@
 // TODO: take a bunch of the general game logic from this one
 
 import { useFrame } from '@react-three/fiber'
-import { useStore } from './state/useStore'
+import { useStore } from './useStore'
 import {Howl} from 'howler';
 import { useThree } from "@react-three/fiber";
-
-
-var drum = new Howl({
-    preload:true,
-    src: ['stab.wav'],
-});
-
-var hit = new Howl({
-    preload:true,
-    volume: 0.2,
-    src: ['hit.wav'],
-});
 
 const ballSelector = s => s.ball
 const setCursorStyleSelector = s => s.setCursorStyle
@@ -38,13 +26,23 @@ const currentScoreSelector = s => s.currentScore
 const setCurrentScoreSelector = s => s.setCurrentScore
 const highScoreSelector = s => s.highScore
 const setHighScoreSelector = s => s.setHighScore
-
+const storedOptionsSelector = s => s.storedOptions
 
 
 let svx=0
 let svy=0 //TODO check best way to set velocity
 let svz = -1
 
+var hit = new Howl({
+    preload:true,
+    src: ['./audio/hit.wav'],
+});
+
+
+var enemyHit = new Howl({
+    preload:true,
+    src: ['./audio/hit.wav'],
+});
 
 export default function GameState() {
 //   const camera = useThree(state => state.camera)
@@ -72,16 +70,24 @@ export default function GameState() {
   const setGlowVals = useStore(setGlowValsSelector);
 
   const gameVariables = useStore(gameVariablesSelector)
+  const storedOptions = useStore(storedOptionsSelector)
+
   const speedMultiplier = useStore(speedMultiplierSelector)
   const setSpeedMultiplier = useStore(setSpeedMultiplierSelector)
 
   const gameWidth = gameVariables.gameWidth
   const gameLength = gameVariables.gameLength
   const ballRadius = gameVariables.ballRadius
-  const paddleWidth = gameVariables.paddleWidth
+  const paddleWidth = storedOptions.paddleWidth
+  const speedAdd = parseFloat(storedOptions.speed)
   const paddleHeight = paddleWidth
   const ballBounds = gameWidth/2 - ballRadius;
   let windowWidth, windowHeight
+
+
+  const volume = parseFloat(storedOptions.volume)/100
+  hit.volume(0.3*volume)
+  enemyHit.volume(0.1*volume)
 
   useThree(({ camera }) => {
     camera.position.z = Math.max(3, (gameWidth/2) / (Math.tan(camera.fov * Math.PI/360) * camera.aspect))
@@ -91,6 +97,7 @@ export default function GameState() {
 
   useFrame(({pointer}, delta) => {
     if (gamePlaying && overlay!=='playing'){
+        setCursorStyle('default')
         return null
     }
 
@@ -106,7 +113,8 @@ export default function GameState() {
         }
         if (ball.current.position.z <= -gameLength){
             svz = -svz
-            if (speedMultiplier<=30) {setSpeedMultiplier(speedMultiplier+0.5)}
+            if (speedMultiplier<=30) {setSpeedMultiplier(speedMultiplier+speedAdd)}
+            enemyHit.play()
         }
 
         const positionDelta = speedMultiplier * delta;

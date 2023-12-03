@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react';
-import './countdown.css';
+import './views-css/countdown.css';
 import {useStore } from '../state/useStore'
 
 const setOverlaySelector = s => s.setOverlay

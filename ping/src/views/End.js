@@ -1,5 +1,5 @@
 import React from 'react';
-import './end.css';
+import './views-css/end.css';
 import { useStore } from '../state/useStore'
 
 const setOverlaySelector = s => s.setOverlay

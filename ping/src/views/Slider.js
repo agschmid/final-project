@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStore } from '../state/useStore'
 
-import './slider.css';
+import './views-css/slider.css';
 
 // import { useStore } from '../state/useStore'
 const setStoredOptionsSelector = s => s.setStoredOptions
@@ -13,15 +13,28 @@ export default function Slider(props){
   const setStoredOptions = useStore(setStoredOptionsSelector)
   const storedOptions = useStore(storedOptionsSelector)
 
+  
   const updateSlider = function(event) {
-  if (props.setSliderVal ==='volume')
-    setStoredOptions({...storedOptions, volume: event.target.value});
+    switch(props.setSliderVal ) {
+      case 'volume':
+        setStoredOptions({...storedOptions, volume: event.target.value});
+        break
+      case 'paddle':
+        setStoredOptions({...storedOptions, paddleWidth: event.target.value});
+        break
+      case 'speed':
+        setStoredOptions({...storedOptions, speed: event.target.value});
+        break
+      default:
+        break
+    }
   }
 
   return (
     <div className="slidecontainer">
-      <span>Music Volume: {props.sliderVal}</span>
-      <input type="range" min="0" max="100"  step="10" value={props.sliderVal} className="slider" onChange={updateSlider}/>
+      <span>{props.title}: {props.sliderVal}</span>
+      <input type="range" min={props.min} max={props.max}  step={props.step} value={props.sliderVal} className="slider" onChange={updateSlider}/>
+      <span>{props.description}</span>
     </div>
   ) 
 }

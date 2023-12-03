@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './tutorial.css';
+import './views-css/tutorial.css';
 import { mobileCheck, useStore } from '../state/useStore'
 
 const setOverlaySelector = s => s.setOverlay
@@ -53,18 +53,12 @@ export default function TutorialScreen(props){
           <div className='tutorialText'>{tutorialScreens[currentTutScreen].text}</div>
             <div className ={`tutorialButtons ${tutorialScreens[currentTutScreen].start && "tutorialButtonsSingle"}`}>
               {!tutorialScreens[currentTutScreen].start && <button className = "shortBox thinBox" onClick={() => setCurrentTutScreen(currentTutScreen-1)}>BACK</button>}
-              {tutorialScreens[currentTutScreen].end ? <button className='green playButton shortBox' onClick={function(){setOverlay('countdown'); setGamePlaying(true); props.playSound();}}>PLAY GAME</button> : <button  className = "shortBox thinBox" onClick={()=> setCurrentTutScreen(currentTutScreen+1)}>NEXT</button>}
+              {tutorialScreens[currentTutScreen].end ? <button className='green playButton shortBox' onClick={function(){setOverlay('countdown'); setGamePlaying(true);}}>PLAY GAME</button> : <button  className = "shortBox thinBox" onClick={()=> setCurrentTutScreen(currentTutScreen+1)}>NEXT</button>}
             </div>
           </div>
       </div>
 
     </div>
     </>
-      // <div id="homeScreen">
-      // <span className='bottomMargin' style={{color: 'white'}}>HIGHSCORE: {highScore}</span>
-      // <button className='shortBox colorful' onClick={() => setOverlay('customize')}>customize visuals</button>
-      // <button className='bottomMargin' onClick={() => setOverlay('accessibility')}>accessibility & <br></br> controls</button>
-      // <button className='bigFont green' onClick={function(){setOverlay('countdown'); setGamePlaying(true); props.playSound();}}>PLAY GAME</button>
-      // </div>
   ) 
 }

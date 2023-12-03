@@ -1,5 +1,5 @@
 import React from 'react';
-import './confirm.css';
+import './views-css/confirm.css';
 import { useStore } from '../state/useStore'
 
 const setGamePlayingSelector = s => s.setGamePlaying
