@@ -31,8 +31,7 @@ function Prism(props) {
 
 
   // This begins by rendering each flat plain with a gradient.
-  // It then call sthe generate static lines function to add all the lines. 
-  // TODO would be great to turn the flat plains into a function
+  // It then calls the generate static lines function to add all the lines. 
   return (
     <>
     <mesh ref={prism}>

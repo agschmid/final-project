@@ -33,6 +33,10 @@ canvas{
 }
 
 
+.vhs {
+    background-image: url('../public/textures/vhs-lines.png');
+    background-blend-mode: screen;
+}
 
 /* Button designs */
 
@@ -85,8 +89,9 @@ button:focus:not(:focus-visible) {
 }
 
 .hugeFont {
-    font-size: 800%;
+    font-size: 700%;
     color: white;
+    height: fit-content;
 }
 
 .confirmText {
@@ -96,6 +101,15 @@ button:focus:not(:focus-visible) {
 .bottomMargin {
     margin-bottom: 40px;
 }
+
+.rightMargin{
+    margin-right: 20px;
+}
+
+.leftMargin{
+    margin-left: 20px;
+}
+
 
 .shortBox {
     height: 40px;
@@ -117,6 +131,26 @@ button:focus:not(:focus-visible) {
     background-image: linear-gradient(to right, #00FF1A,#00FFF5,#9E00FF);
     background-size: 110%;
     background-position: -5px 5px;
+}
+
+
+.highScore {
+    color: white;
+    background-color: black;
+    border: 1px solid rgb(216, 138, 253);
+    box-shadow: 0px 0px 5px 2px rgba(243, 69, 255, 0.5);
+    font-size: 150%;
+    padding: 0px;
+}
+
+.extraPadding {
+    padding: 10px 20px 10px 20px;
+}
+
+.squareNumbers{
+    min-width: 1em;
+    height: 1em;
+    text-align: center;
 }
 
 .shadedBox{

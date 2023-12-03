@@ -32,7 +32,7 @@ function PlayScreen(){
   return (
       <main id="playScreen">
         <button className='shortBox thinBox pauseMargin' onClick={() => setOverlay('paused')}>{mobileCheck() ? "PAUSE" :"PAUSE (ESC)"}</button>
-        <span className='scoreDisplay'>{currentScore===highScore+1 ? "NEW HIGH! " : ''} {currentScore}</span> 
+        <span className='scoreDisplay highScore squareNumbers'>{currentScore}{currentScore>=highScore+1 ? "!" : ''}</span> 
       </main>
   ) 
 }

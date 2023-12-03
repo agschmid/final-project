@@ -42,6 +42,11 @@ var enemyHit = new Howl({
     src: ['./audio/hit.wav'],
 });
 
+var wallHit = new Howl({
+    preload:true,
+    src: ['./audio/ping.mp3'],
+});
+
 
 // Component that handles all the game changes with a single frame loop
 export default function GameState() {
@@ -81,6 +86,8 @@ export default function GameState() {
     // Set the game sounds volume based on global value
     hit.volume(0.3*volume)
     enemyHit.volume(0.1*volume)
+    wallHit.volume(0.2*volume)
+
 
     // Adjust the camera position to always contain the game
     useThree(({ camera }) => {
@@ -109,9 +116,11 @@ export default function GameState() {
             // Bounce the ball of the walls if it hits them
             if (Math.abs(ball.current.position.x)>=ballBounds){
                 svx =-svx 
+                wallHit.play()
             }
             if (Math.abs(ball.current.position.y)>=ballBounds){
                 svy = -svy
+                wallHit.play()
             }
 
             // Bounce the ball back from the enemy and speed it up 

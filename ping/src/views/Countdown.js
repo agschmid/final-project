@@ -27,7 +27,7 @@ function CountdownScreen(){
 
   return (
       <main id="countdownScreen" className='hugeFont centeredScreen'>
-        <span id='countDisplay'>{countVal ? countVal : 'PLAY!'}</span>        
+        <span id='countDisplay' className={`highScore ${countVal ? 'squareNumbers' : ''}`}>{countVal ? countVal : 'PLAY!'}</span>        
       </main>
   ) 
 }
