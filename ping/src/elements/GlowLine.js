@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+// Glowing line component used to construct prism
 const GlowLine = (props) => {
   return (
     <mesh>

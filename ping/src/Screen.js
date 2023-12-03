@@ -2,7 +2,6 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Bloom, EffectComposer} from '@react-three/postprocessing'
 import {Howl} from 'howler';
-
 import { useStore } from './state/useStore'
 import "./style.css" 
 
@@ -13,8 +12,6 @@ import CountdownScreen from './views/Countdown';
 import PauseScreen from './views/Pause.js';
 import ConfirmScreen from './views/Confirm.js';
 import TutorialScreen from './views/Tutorial.js';
-
-
 import Background from './elements/Background.js';
 import Ball from './elements/Ball.js';
 import Paddle from './elements/Paddle.js';
@@ -25,12 +22,12 @@ import GlowGrid from './elements/GlowGrid';
 import EndScreen from './views/End';
 
 
+// Loading in the music files, and setting the looping song to play after the opener
 var song = new Howl({
     preload:true,
     src: ['./audio/song.wav'],
     loop:true
 });
-
 
 var opener = new Howl({
     preload:true,
@@ -40,45 +37,42 @@ var opener = new Howl({
     }
 });
 
+// Loading my Global variables (selectors are here, the are loaded in the component function)
 const playingSelector = s => s.gamePlaying
 const overlaySelector = s => s.overlay
 const cursorStyleSelector = s => s.cursorStyle
-
-
-// const setStoredOptionsSelector  = s => s.setStoredOptions
 const storedOptionsSelector  = s => s.storedOptions
 
-
+// Toggle the music on/off if it's playing
 function toggleMusic(){
     if (opener.playing()){
         opener.stop()
     } else{
         song.playing() ? song.stop() : opener.play();
     }
-
 }
 
+// Component for the whole game – loaded into App.js
 function Screen() {
+
+    // Finish loading global variables
     const overlay = useStore(overlaySelector)
     const gamePlaying = useStore(playingSelector)
     const cursorStyle = useStore(cursorStyleSelector)
     const storedOptions = useStore(storedOptionsSelector)
-    // const setStoredOptions = useStore(setStoredOptionsSelector)
-
-
     const volume = storedOptions.volume
 
-
-
-
+    // Update the volume based on global value
     song.volume(volume/200)
     opener.volume(volume/200)
     
+    // Update the cursor type based on global value
     let canvasStyle = {
         position: "absolute",
         cursor: cursorStyle
     }
 
+    // Handle all the different react component overlays
     let screenOverlay
     switch(overlay) {
         case 'home':
@@ -96,9 +90,6 @@ function Screen() {
         case 'accessibility':
             screenOverlay = <AccessibilityScreen></AccessibilityScreen>;
             break
-        // case 'customize':
-        //     screenOverlay = <CustomizeScreen></CustomizeScreen>;
-        //     break
         case 'end':
             screenOverlay = <EndScreen></EndScreen>;
             break
@@ -113,7 +104,8 @@ function Screen() {
             break
     }
 
-
+    // Rendering the react-three-fiber canvas, and the relevant overlay from above
+    // The ball, paddle, and enemy elements are loadded conditionally if the game has started using gamePlaying
     return (
         <>
         <Canvas camera={{ fov: 80, position: [0,0,3]}} style={canvasStyle} >

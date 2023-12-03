@@ -3,16 +3,12 @@ import {useLoader} from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { useStore } from '../state/useStore'
 
-
+// The red enemy paddle
 function Enemy(props) {
     const texture = useLoader(TextureLoader, './textures/enemy.png')
-
     let enemy = useStore((s) => s.enemy)
-    // let enemyBrightness = useStore((s)=> s.enemyBrightness) TODO
     let gameInfo = useStore((s) => s.gameVariables)
 
-
-    // Return the view, these are regular Threejs elements expressed in JSX
     return (
         <mesh
         {...props}

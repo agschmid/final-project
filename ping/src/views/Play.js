@@ -6,18 +6,21 @@ const setOverlaySelector = s => s.setOverlay
 const currentScoreSelector = s => s.currentScore
 const highScoreSelector = s => s.highScore
 
+
+// The overlay for the game while it is playing
 function PlayScreen(){
   const setOverlay = useStore(setOverlaySelector)
-
   const currentScore = useStore(currentScoreSelector)
   const highScore = useStore(highScoreSelector)
 
+  // Handle the escape key being pressed, taking to pause menu
   const escapePressed = (event) =>{
     if (event.key === 'Escape') {
       setOverlay('paused')
     }
   }
 
+  // Event listener for the escape key
   useEffect(() => {
     document.addEventListener("keydown", escapePressed)
     return function cleanup() {
@@ -25,12 +28,12 @@ function PlayScreen(){
     }
   })
 
+  // Renders (escape) hint if on pc but not mobile using mobileCheck function
   return (
-      <div id="playScreen">
+      <main id="playScreen">
         <button className='shortBox thinBox pauseMargin' onClick={() => setOverlay('paused')}>{mobileCheck() ? "PAUSE" :"PAUSE (ESC)"}</button>
         <span className='scoreDisplay'>{currentScore===highScore+1 ? "NEW HIGH! " : ''} {currentScore}</span> 
-        {/* TODO Check if people like new high always being there? */}
-      </div>
+      </main>
   ) 
 }
 

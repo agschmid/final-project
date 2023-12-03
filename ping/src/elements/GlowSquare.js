@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { useStore } from '../state/useStore'
 
-
+// The glowing squares used to construct the glow grid
 const GlowSquare = forwardRef(function(props, ref) {
   let gameInfo = useStore((s) => s.gameVariables)
   const delta = 0.01

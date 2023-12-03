@@ -1,8 +1,7 @@
 import React from 'react'
 import { useStore } from '../state/useStore'
 
-const color = 'orange' 
-
+// The Orange Ball
 function Ball(props) {
   let ball = useStore((s) => s.ball)
   let gameInfo = useStore((s) => s.gameVariables)
@@ -13,7 +12,7 @@ function Ball(props) {
       ref={ball}
       >
       <sphereGeometry args={[gameInfo.ballRadius, 32, 16]} />
-      <meshStandardMaterial color={color} />
+      <meshStandardMaterial color={'orange'} />
     </mesh>
   )
 }

@@ -3,7 +3,7 @@ import {useLoader} from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { useStore } from '../state/useStore'
 
-
+// The users paddle element
 function Paddle(props) {
     const texture = useLoader(TextureLoader, './textures/paddle.png')
 

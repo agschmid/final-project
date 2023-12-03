@@ -1,12 +1,4 @@
-#tutorialScreen{
-    width: 100%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-}
+/* This is all sizing of css just for the tutorial screen */
 
 .tutorialParent{
     height: 90%;
@@ -15,7 +7,6 @@
     align-items: center;
     justify-content: center;
 }
-
 
 .tutorialHome{
     display: flex;
@@ -39,10 +30,6 @@
     padding: 20px;
     font-size: 150%;
     font-family: "VT323";
-}
-
-.tutorialImage{
-    width: 100%;
 }
 
 .progress{
@@ -81,15 +68,4 @@
 
 .playButton{
     width: 100%;
-}
-
-.shadedBox{
-    outline: 1px solid black;
-    background-color: #BFBFBF;
-    color:black;
-    border-left: 3px solid rgba(255, 255, 255, .2);
-    border-top: 3px solid rgba(255, 255, 255, .2);
-    border-right: 3px solid rgba(0, 0, 0, .2);
-    border-bottom: 3px solid rgba(0, 0, 0, .2);
-    pointer-events: auto;
 }

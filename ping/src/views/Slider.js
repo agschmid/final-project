@@ -1,18 +1,16 @@
 import React from 'react';
 import { useStore } from '../state/useStore'
-
 import './views-css/slider.css';
 
-// import { useStore } from '../state/useStore'
 const setStoredOptionsSelector = s => s.setStoredOptions
 const storedOptionsSelector = s => s.storedOptions
 
-//Component for a roll, its price, and options, as would be shown on the products page
+// A slider component, that can handle changes to volume, paddle size, or speed.
+// Requires title, value, min, max, step, and description to render properly.
 export default function Slider(props){
 
   const setStoredOptions = useStore(setStoredOptionsSelector)
   const storedOptions = useStore(storedOptionsSelector)
-
   
   const updateSlider = function(event) {
     switch(props.setSliderVal ) {
@@ -31,9 +29,9 @@ export default function Slider(props){
   }
 
   return (
-    <div className="slidecontainer">
-      <span>{props.title}: {props.sliderVal}</span>
-      <input type="range" min={props.min} max={props.max}  step={props.step} value={props.sliderVal} className="slider" onChange={updateSlider}/>
+    <div className="slidecontainer shadedBox">
+      <label for={props.setSliderVal}> <span>{props.title}: {props.sliderVal}</span></label>
+      <input id={props.setSliderVal} type="range" min={props.min} max={props.max}  step={props.step} value={props.sliderVal} className="slider" onChange={updateSlider}/>
       <span>{props.description}</span>
     </div>
   ) 

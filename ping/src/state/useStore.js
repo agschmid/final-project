@@ -1,45 +1,44 @@
 import { createRef } from 'react'
 import create from 'zustand'
 
+//This is my global set of variables and hooks
+// I used this method from another react-three game
+// https://github.com/akarlsten/cuberun/blob/main/src/state/useStore.js
+
 const useStore = create((set, get) => {
   return {
     paddle: createRef(),
     enemy: createRef(),
     ball: createRef(),
     prism: createRef(),
+    gameVariables: {gameWidth: 5, gameLength: 10, ballRadius: 0.5, enemyWidth: 1},
     glowSquares: Array(10).fill(createRef()),
     glowVals: Array(10).fill(0.5),
-    overlay: 'home',
-    gamePlaying: false,
-    musicPlaying: false,
-    paddleBrightness: 0,
-    enemyBrightness: 0,
-    currentScore: 0,
-    speedMultiplier: 5,
-    paddlePosition: {x: 0, y:0, xCenter: 0, yCenter: 0},
-    controlScheme: 'touch', 
-    highScore : JSON.parse(localStorage.getItem("pingHighScore")) || 0,
-    gameVariables: {gameWidth: 5, gameLength: 10, ballRadius: 0.5, enemyWidth: 1},
-    cursorStyle: 'default',
-    storedOptions: JSON.parse(localStorage.getItem("pingStoredOptions")) || {volume: 60, paddleWidth: 1, speed: 0.5},//TODO Finish this properly
-    setStoredOptions: (storedOptions) => { set(state => ({ storedOptions: storedOptions })); localStorage.setItem("pingStoredOptions", JSON.stringify(storedOptions))},
-    setCursorStyle: (cursorStyle) => set(state => ({ cursorStyle: cursorStyle })),
-    setMusicPlaying: (musicPlaying) => set(state => ({ musicPlaying: musicPlaying })),
-    setGamePlaying: (gamePlaying) => set(state => ({ gamePlaying: gamePlaying })),
-    setPaddlePosition: (paddlePosition) => set(state => ({ paddlePosition: paddlePosition })),
-    setHighScore: (highScore) => { set(state => ({ highScore: highScore })); localStorage.setItem("pingHighScore", highScore)},
     setGlowVals: (glowVals) => set(state => ({ glowVals: glowVals })),
+    overlay: 'home',
     setOverlay: (overlay) => set(state => ({ overlay: overlay })),
-    setSpeedMultiplier: (speedMultiplier) => set(state => ({ speedMultiplier: speedMultiplier })),
+    gamePlaying: false,
+    setGamePlaying: (gamePlaying) => set(state => ({ gamePlaying: gamePlaying })),
+    musicPlaying: false,
+    setMusicPlaying: (musicPlaying) => set(state => ({ musicPlaying: musicPlaying })),
+    paddleBrightness: 0,
     setPaddleBrightness: (paddleBrightness) => set(state => ({ paddleBrightness: paddleBrightness })),
-    setEnemyBrightness: (enemyBrightness) => set(state => ({ enemyBrightness: enemyBrightness })),
+    currentScore: 0,
     setCurrentScore: (currentScore) => set(state => ({ currentScore: currentScore })),
+    speedMultiplier: 5,
+    setSpeedMultiplier: (speedMultiplier) => set(state => ({ speedMultiplier: speedMultiplier })),
+    paddlePosition: {x: 0, y:0, xCenter: 0, yCenter: 0},
+    setPaddlePosition: (paddlePosition) => set(state => ({ paddlePosition: paddlePosition })),
+    highScore : JSON.parse(localStorage.getItem("pingHighScore")) || 0,
+    setHighScore: (highScore) => { set(state => ({ highScore: highScore })); localStorage.setItem("pingHighScore", highScore)},
+    cursorStyle: 'default',
+    setCursorStyle: (cursorStyle) => set(state => ({ cursorStyle: cursorStyle })),
+    storedOptions: JSON.parse(localStorage.getItem("pingStoredOptions")) || {volume: 60, paddleWidth: 1, speed: 0.5},
+    setStoredOptions: (storedOptions) => { set(state => ({ storedOptions: storedOptions })); localStorage.setItem("pingStoredOptions", JSON.stringify(storedOptions))},
   }
 })
 
-const mutation = {
-}
-
+// This is a function that checks for if the game is on mobile.
 //https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 const mobileCheck = function() {
   let check = false;
@@ -48,4 +47,4 @@ const mobileCheck = function() {
   return check;
 };
 
-export { useStore, mutation, mobileCheck }
+export { useStore, mobileCheck }

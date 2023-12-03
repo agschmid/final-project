@@ -3,10 +3,14 @@ import { useStore } from '../state/useStore'
 import {GradientTexture} from '@react-three/drei'
 import GlowLine from './GlowLine'
 
+
+// The game area and it's surroundings
 function Prism(props) {
   let prism = useStore((s) => s.prism)
   let gameInfo = useStore((s) => s.gameVariables)
 
+
+  // Loop to generate all the static glowing lines in the game
   const generateStaticLines = ()=>{
     let staticGlowLines = []
     for (let i=0; i<6; i++){
@@ -26,7 +30,9 @@ function Prism(props) {
   }
 
 
-
+  // This begins by rendering each flat plain with a gradient.
+  // It then call sthe generate static lines function to add all the lines. 
+  // TODO would be great to turn the flat plains into a function
   return (
     <>
     <mesh ref={prism}>
@@ -38,9 +44,9 @@ function Prism(props) {
       <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
       <meshBasicMaterial>
         <GradientTexture
-          stops={[1,0]} // As many stops as you want
-          colors={['#591E56', '#090060']} // Colors need to match the number of stops
-          size={1024} // Size is optional, default = 1024
+          stops={[1,0]} 
+          colors={['#591E56', '#090060']} 
+          size={1024} 
          />
       </meshBasicMaterial>
     </mesh>
@@ -50,12 +56,11 @@ function Prism(props) {
     rotation={[-Math.PI/2,Math.PI/2,0]}
     >
     <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
-    {/* <boxGeometry args={[5, 5, 20]} /> */}
     <meshBasicMaterial>
         <GradientTexture
-          stops={[0, 1]} // As many stops as you want
-          colors={['#591E56', '#090060']} // Colors need to match the number of stops
-          size={1024} // Size is optional, default = 1024
+          stops={[0, 1]} 
+          colors={['#591E56', '#090060']} 
+          size={1024} 
          />
       </meshBasicMaterial>
   </mesh>
@@ -67,9 +72,9 @@ function Prism(props) {
       <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
       <meshBasicMaterial>
         <GradientTexture
-          stops={[0, 1]} // As many stops as you want
-          colors={['#271446', '#81198c']} // Colors need to match the number of stops
-          size={1024} // Size is optional, default = 1024
+          stops={[0, 1]} 
+          colors={['#271446', '#81198c']} 
+          size={1024} 
          />
       </meshBasicMaterial>
     </mesh>
@@ -81,14 +86,12 @@ function Prism(props) {
     <planeGeometry args={[gameInfo.gameWidth, gameInfo.gameLength]}/>
     <meshBasicMaterial>
         <GradientTexture
-          stops={[0, 1]} // As many stops as you want
-          colors={['#BE26CF', '#2F0C4E']} // Colors need to match the number of stops
-          size={1024} // Size is optional, default = 1024
+          stops={[0, 1]} 
+          colors={['#BE26CF', '#2F0C4E']} 
+          size={1024} 
          />
       </meshBasicMaterial>
     </mesh>
-
-
 
   <mesh
     {...props}
@@ -113,9 +116,9 @@ function Prism(props) {
     <planeGeometry args={[gameInfo.gameWidth, 5]}/>
     <meshBasicMaterial>
         <GradientTexture
-          stops={[0, 1]} // As many stops as you want
-          colors={['#81198c', '#2F0C4E']} // Colors need to match the number of stops
-          size={1024} // Size is optional, default = 1024
+          stops={[0, 1]} 
+          colors={['#81198c', '#2F0C4E']} 
+          size={1024} 
          />
       </meshBasicMaterial>
   </mesh>
@@ -127,69 +130,15 @@ function Prism(props) {
     <planeGeometry args={[gameInfo.gameWidth, 5]}/>
     <meshBasicMaterial>
         <GradientTexture
-          stops={[0, 1]} // As many stops as you want
-          colors={['#2F0C4E', '#81198c']} // Colors need to match the number of stops
-          size={1024} // Size is optional, default = 1024
+          stops={[0, 1]} 
+          colors={['#2F0C4E', '#81198c']} 
+          size={1024} 
          />
       </meshBasicMaterial>
   </mesh>
   </mesh>
 
   {generateStaticLines()}
-
-
-  {/* TODO do this with a loop and do the whole area properly*/}
-  {/* <GlowLine position={[-gameInfo.gameWidth/2-2.5,-1,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-  <GlowLine position={[-gameInfo.gameWidth/2-2.5,-2,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-  <GlowLine position={[-gameInfo.gameWidth/2-2.5, 0,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-  <GlowLine position={[-gameInfo.gameWidth/2-2.5, 1,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-  <GlowLine position={[-gameInfo.gameWidth/2-2.5,2,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-
-  <GlowLine position={[gameInfo.gameWidth/2+2.5,-1,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-  <GlowLine position={[gameInfo.gameWidth/2+2.5,-2,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-  <GlowLine position={[gameInfo.gameWidth/2+2.5, 0,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-  <GlowLine position={[gameInfo.gameWidth/2+2.5, 1,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-  <GlowLine position={[gameInfo.gameWidth/2+2.5,2,0]} rotation = {[0,0,0]} length={5}></GlowLine>
-
-
-  <GlowLine position={[0+gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-  <GlowLine position={[1+gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-  <GlowLine position={[2+gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-  <GlowLine position={[3+gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-  <GlowLine position={[4+gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-
-  <GlowLine position={[-gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-  <GlowLine position={[-1-gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-  <GlowLine position={[-2-gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-  <GlowLine position={[-3-gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine>
-  <GlowLine position={[-4-gameInfo.gameWidth/2,0,0]} rotation = {[0,0,Math.PI/2]} length={5}></GlowLine> */}
-
-
-  {/* <GlowLine position={[-gameInfo.gameWidth/2,0,-gameInfo.gameLength/2]} rotation = {[0,Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[-gameInfo.gameWidth/2,-1,-gameInfo.gameLength/2]} rotation = {[0,Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[-gameInfo.gameWidth/2,-2,-gameInfo.gameLength/2]} rotation = {[0,Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[-gameInfo.gameWidth/2,1,-gameInfo.gameLength/2]} rotation = {[0,Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[-gameInfo.gameWidth/2,2,-gameInfo.gameLength/2]} rotation = {[0,Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-
-  <GlowLine position={[gameInfo.gameWidth/2,0,-gameInfo.gameLength/2]} rotation = {[0,-Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[gameInfo.gameWidth/2,-1,-gameInfo.gameLength/2]} rotation = {[0,-Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[gameInfo.gameWidth/2,-2,-gameInfo.gameLength/2]} rotation = {[0,-Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[gameInfo.gameWidth/2,1,-gameInfo.gameLength/2]} rotation = {[0,-Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[gameInfo.gameWidth/2,2,-gameInfo.gameLength/2]} rotation = {[0,-Math.PI/2,0]} length={gameInfo.gameLength} glow={1}></GlowLine> */}
-
-  {/* <GlowLine position={[0,gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[1,gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[2,gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[-1,gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[-2,gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-
-  <GlowLine position={[0,-gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[-Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[1,-gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[-Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[2,-gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[-Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[-1,-gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[-Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
-  <GlowLine position={[-2,-gameInfo.gameWidth/2,-gameInfo.gameLength/2]} rotation = {[-Math.PI/2,0,Math.PI/2]} length={gameInfo.gameLength} glow={1}></GlowLine>
- */}
-
   </>
   )
 }

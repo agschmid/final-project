@@ -2,11 +2,10 @@ import React from 'react'
 import GlowSquare from './GlowSquare'
 import { useStore } from '../state/useStore'
 
-
+// The grid of glowing squares where the brightness can change
 function GlowGrid(props) {
    let glowSquares = useStore((s) => s.glowSquares)
    let glowVals = useStore((s) => s.glowVals)
-
 
   return (
     <>

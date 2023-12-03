@@ -5,9 +5,8 @@ import { mobileCheck, useStore } from '../state/useStore'
 const setOverlaySelector = s => s.setOverlay
 const setGamePlayingSelector = s => s.setGamePlaying
 
-
+// Information for each page of the tutorial 
 const tutorialScreens = []
-
 tutorialScreens.push({video: "./tutorial-clips/tut1.webm", text: 'After the countdown, the ball will launch forward.', start: true, end: false})
 tutorialScreens.push({video: "./tutorial-clips/tut2.webm", text: `Use your ${mobileCheck() ? 'finger' : 'mouse'} to move your paddle around.`, start: false, end: false})
 tutorialScreens.push({video: "./tutorial-clips/tut3.webm", text: 'Your goal is to hit the ball back with the paddle. HINT: Use the glowing lines to estimate distance.', start: false, end: false})
@@ -15,11 +14,14 @@ tutorialScreens.push({video: "./tutorial-clips/tut4.webm", text: 'The enemy will
 tutorialScreens.push({video: "./tutorial-clips/tut5.webm", text: 'Your goal is to get as many points as possible – Good Luck!', start: false, end: true})
 
 
+// Tutorial screen overlay
 export default function TutorialScreen(props){
   const setOverlay = useStore(setOverlaySelector)
   const setGamePlaying = useStore(setGamePlayingSelector)
   const [currentTutScreen, setCurrentTutScreen] = useState(0)
   
+
+  // Update the progress bar visual based on the current screen
   const progressBar = ()=>{
     let progressDivs = []
     for (let i=0; i<tutorialScreens.length; i++){
@@ -32,33 +34,42 @@ export default function TutorialScreen(props){
     return progressDivs
   }
 
-
+  //Conditionally render the different pages of the tutorial, updating with setCurrentTutScreen hook
   return (
     <>
-    <div className = "tutorialHome">
+    <nav className = "tutorialHome">
       <button className='shortBox thinBox pauseMargin' onClick={() => setOverlay('home')}>HOME</button>
-    </div>
+    </nav>
 
-    <div className="tutorialParent">
-
+    <main className="tutorialParent">
       <div className = 'tutorialScreen shadedBox'>
+
         <span className='bigFont'>HOW TO PLAY</span>
+
         <div className = "tutorialContent">
           <div className = "progressParent shadedBox">
             {progressBar()}
           </div>
-            <video playsInline autoPlay muted loop className='tutVid'>
-              <source src={tutorialScreens[currentTutScreen].video} type="video/webm"/>
-            </video>          
-          <div className='tutorialText'>{tutorialScreens[currentTutScreen].text}</div>
-            <div className ={`tutorialButtons ${tutorialScreens[currentTutScreen].start && "tutorialButtonsSingle"}`}>
-              {!tutorialScreens[currentTutScreen].start && <button className = "shortBox thinBox" onClick={() => setCurrentTutScreen(currentTutScreen-1)}>BACK</button>}
-              {tutorialScreens[currentTutScreen].end ? <button className='green playButton shortBox' onClick={function(){setOverlay('countdown'); setGamePlaying(true);}}>PLAY GAME</button> : <button  className = "shortBox thinBox" onClick={()=> setCurrentTutScreen(currentTutScreen+1)}>NEXT</button>}
-            </div>
-          </div>
-      </div>
 
-    </div>
+          <video playsInline autoPlay muted loop className='tutVid'>
+            <source src={tutorialScreens[currentTutScreen].video} type="video/webm"/>
+            <p>
+                Your browser doesn't support HTML video. This video is described by the tutorial text below. 
+            </p>
+          </video>          
+
+          <div className='tutorialText'>
+            {tutorialScreens[currentTutScreen].text}
+          </div>
+
+          <div className ={`tutorialButtons ${tutorialScreens[currentTutScreen].start && "tutorialButtonsSingle"}`}>
+            {!tutorialScreens[currentTutScreen].start && <button className = "shortBox thinBox" onClick={() => setCurrentTutScreen(currentTutScreen-1)}>BACK</button>}
+            {tutorialScreens[currentTutScreen].end ? <button className='green playButton shortBox' onClick={function(){setOverlay('countdown'); setGamePlaying(true);}}>PLAY GAME</button> : <button  className = "shortBox thinBox" onClick={()=> setCurrentTutScreen(currentTutScreen+1)}>NEXT</button>}
+          </div>
+        </div>
+
+      </div>
+    </main>
     </>
   ) 
 }
