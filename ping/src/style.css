@@ -94,10 +94,6 @@ button:focus:not(:focus-visible) {
     height: fit-content;
 }
 
-.confirmText {
-    color: white;
-}
-
 .bottomMargin {
     margin-bottom: 40px;
 }
@@ -128,13 +124,13 @@ button:focus:not(:focus-visible) {
 }
 
 .colorful {
-    background-image: linear-gradient(to right, #00FF1A,#00FFF5,#9E00FF);
+    background-image: linear-gradient(to right, #00FF1A,#00FFF5,#C49AFE);
     background-size: 110%;
     background-position: -5px 5px;
 }
 
 
-.highScore {
+.blackPink {
     color: white;
     background-color: black;
     border: 1px solid rgb(216, 138, 253);
@@ -142,6 +138,19 @@ button:focus:not(:focus-visible) {
     font-size: 150%;
     padding: 0px;
 }
+
+h1.blackPink {
+    padding: 20px;
+    font-size: 250%;
+    font-weight: lighter;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 
 .extraPadding {
     padding: 10px 20px 10px 20px;
@@ -162,6 +171,10 @@ button:focus:not(:focus-visible) {
     border-right: 3px solid rgba(0, 0, 0, .2);
     border-bottom: 3px solid rgba(0, 0, 0, .2);
     pointer-events: auto;
+}
+
+#countDisplay{
+    font-size: 150%;
 }
 
 

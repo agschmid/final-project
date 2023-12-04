@@ -31,21 +31,8 @@ let svx=0
 let svy=0 
 let svz = -1
 
-// Loading audio elements that are triggered by the game
-var hit = new Howl({
-    preload:true,
-    src: ['./audio/hit.wav'],
-});
 
-var enemyHit = new Howl({
-    preload:true,
-    src: ['./audio/hit.wav'],
-});
 
-var wallHit = new Howl({
-    preload:true,
-    src: ['./audio/ping.mp3'],
-});
 
 
 // Component that handles all the game changes with a single frame loop
@@ -82,7 +69,22 @@ export default function GameState() {
     let windowWidth, windowHeight
     const volume = parseFloat(storedOptions.volume)/100
 
+    // Loading audio elements that are triggered by the game
+    var hit = new Howl({
+        preload:true,
+        src: ['./audio/hit.wav'],
+    });
 
+    var enemyHit = new Howl({
+        preload:true,
+        src: ['./audio/hit.wav'],
+    });
+
+    var wallHit = new Howl({
+        preload:true,
+        src: ['./audio/ping.mp3'],
+    });
+    
     // Set the game sounds volume based on global value
     hit.volume(0.3*volume)
     enemyHit.volume(0.1*volume)

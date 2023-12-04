@@ -16,7 +16,7 @@ function ConfirmScreen(){
 
     return (
        <main id="confirmScreen" className='centeredScreen vhs'>
-        <span className='confirmText highScore extraPadding'>confirm you want to exit?</span>
+        <h1 className='confirmText blackPink extraPadding'>confirm you want to exit?</h1>
         <button className='shortBox thinBox red bottomMargin' onClick={function(){setOverlay('home'); setGamePlaying(false); setCurrentScore(0); setSpeedMultiplier(5)}}>YES</button>
         <button className='shortBox thinBox' onClick={() => setOverlay('paused')}>NO</button>
        </main>

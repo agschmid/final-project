@@ -17,8 +17,9 @@ function EndScreen(){
 
     return (
        <main id="endScreen" className='centeredScreen'>
-        <span className='highScore extraPadding'>SCORE: {currentScore}</span>
-        <span className='bottomMargin highScore extraPadding'>HIGHSCORE: {highScore}</span>
+        <h1 className='blackPink'>GAME OVER!</h1>
+        <span className='blackPink extraPadding'>SCORE: {currentScore}</span>
+        <span className='bottomMargin blackPink extraPadding'>HIGHSCORE: {highScore}</span>
         <button className='shortBox thinBox red bottomMargin' onClick={function (){setCurrentScore(0); setOverlay('home')}}>EXIT GAME</button>
         <button className='bigFont green' onClick={function (){setOverlay('countdown');setGamePlaying(true);setCurrentScore(0);}}>PLAY AGAIN</button>
        </main>

@@ -31,8 +31,9 @@ function PlayScreen(){
   // Renders (escape) hint if on pc but not mobile using mobileCheck function
   return (
       <main id="playScreen">
+        <h1 style={{display: "none"}}>PLAYING</h1>
         <button className='shortBox thinBox pauseMargin' onClick={() => setOverlay('paused')}>{mobileCheck() ? "PAUSE" :"PAUSE (ESC)"}</button>
-        <span className='scoreDisplay highScore squareNumbers'>{currentScore}{currentScore>=highScore+1 ? "!" : ''}</span> 
+        <span className='scoreDisplay blackPink squareNumbers'>{currentScore}{currentScore>=highScore+1 ? "!" : ''}</span> 
       </main>
   ) 
 }

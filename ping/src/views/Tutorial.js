@@ -19,7 +19,6 @@ export default function TutorialScreen(props){
   const setOverlay = useStore(setOverlaySelector)
   const setGamePlaying = useStore(setGamePlayingSelector)
   const [currentTutScreen, setCurrentTutScreen] = useState(0)
-  
 
   // Update the progress bar visual based on the current screen
   const progressBar = ()=>{
@@ -44,14 +43,14 @@ export default function TutorialScreen(props){
     <main className="tutorialParent">
       <div className = 'tutorialScreen shadedBox'>
 
-        <span className='bigFont'>HOW TO PLAY</span>
+        <h1 className='bigFont'>HOW TO PLAY</h1>
 
         <div className = "tutorialContent">
           <div className = "progressParent shadedBox">
             {progressBar()}
           </div>
 
-          <video playsInline autoPlay muted loop className='tutVid'>
+          <video playsInline autoPlay muted loop className='tutVid' key={tutorialScreens[currentTutScreen].video}>
             <source src={tutorialScreens[currentTutScreen].video} type="video/webm"/>
             <p>
                 Your browser doesn't support HTML video. This video is described by the tutorial text below. 

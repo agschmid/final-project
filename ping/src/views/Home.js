@@ -18,14 +18,14 @@ function HomeScreen(props){
   
   return (
       <main id="homeScreen" className='centeredScreen'>
-      <img src = "./textures/title.svg" alt="PING written in bold colors, with an 80s aesthetic" width='300px;' className='bottomMargin'/>
+      <h1><img src = "./textures/title.svg" alt="PING written in bold colors, with an 80s aesthetic" width='300px;' className='bottomMargin'/></h1>
       <button className='shortBox' onClick={() => setOverlay('tutorial')}>how to play ?</button>
       <button className='shortBox' onClick={() => setOverlay('accessibility')}>accessibility</button>
       <button className='shortBox colorful bottomMargin' onClick={function() {props.toggleSound(); setMusicPlaying(!musicPlaying)}}>
-        {musicPlaying ? <img src = "./textures/pause.svg" alt="musicNote" height='14' className='rightMargin'/> : <img src = "./textures/play.svg" alt="musicNote" height='14' className='rightMargin'/>}
+        {musicPlaying ? <img src = "./textures/pause.svg" alt="musicNote" height='14' className='rightMargin'/> : <img src = "./textures/play.svg" alt="play symbol" height='14' className='rightMargin'/>}
         {musicPlaying ? 'pause music' : 'play music'} 
       </button>
-      <span className='highScore extraPadding'>HIGHSCORE: {highScore}</span>
+      <span className='blackPink extraPadding'>HIGHSCORE: {highScore}</span>
       <button className='bigFont green' onClick={highScore===0 ?  function(){setOverlay('tutorial');} : function(){setOverlay('countdown'); setGamePlaying(true);}}>PLAY GAME</button>
       </main>
   ) 

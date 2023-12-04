@@ -14,6 +14,7 @@ function PauseScreen(props){
 
     return (
        <main id="pauseScreen" className='centeredScreen vhs'>
+        <h1 className='blackPink'>PAUSED</h1>
         <button className='shortBox thinBox red bottomMargin' onClick={() => setOverlay('confirm')}>EXIT GAME</button>
         <button className='shortBox colorful' onClick={function() {props.toggleSound(); setMusicPlaying(!musicPlaying)}}>
             {musicPlaying ? <img src = "./textures/pause.svg" alt="musicNote" height='14' className='rightMargin'/> : <img src = "./textures/play.svg" alt="musicNote" height='14' className='rightMargin'/>}
