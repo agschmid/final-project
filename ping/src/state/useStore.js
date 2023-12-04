@@ -27,8 +27,6 @@ const useStore = create((set, get) => {
     setCurrentScore: (currentScore) => set(state => ({ currentScore: currentScore })),
     speedMultiplier: 5,
     setSpeedMultiplier: (speedMultiplier) => set(state => ({ speedMultiplier: speedMultiplier })),
-    paddlePosition: {x: 0, y:0, xCenter: 0, yCenter: 0},
-    setPaddlePosition: (paddlePosition) => set(state => ({ paddlePosition: paddlePosition })),
     highScore : JSON.parse(localStorage.getItem("pingHighScore")) || 0,
     setHighScore: (highScore) => { set(state => ({ highScore: highScore })); localStorage.setItem("pingHighScore", highScore)},
     cursorStyle: 'default',

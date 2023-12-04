@@ -113,7 +113,7 @@ function Screen() {
             <directionalLight position={[0.5, 0.5, 4]} />
             <directionalLight position={[-0.5, 0.5, 1]} />
             {(gamePlaying) && <> 
-                <Ball position={[0, 0, -0.5]}></Ball>
+                <Ball position={[0.1, 0.1, -0.5]}></Ball>
                 <Paddle position={[0,0,0]}></Paddle>
                 <Enemy></Enemy>
 

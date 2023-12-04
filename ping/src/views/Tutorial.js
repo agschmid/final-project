@@ -7,11 +7,11 @@ const setGamePlayingSelector = s => s.setGamePlaying
 
 // Information for each page of the tutorial 
 const tutorialScreens = []
-tutorialScreens.push({video: "./tutorial-clips/tut1.webm", text: 'After the countdown, the ball will launch forward.', start: true, end: false})
-tutorialScreens.push({video: "./tutorial-clips/tut2.webm", text: `Use your ${mobileCheck() ? 'finger' : 'mouse'} to move your paddle around.`, start: false, end: false})
-tutorialScreens.push({video: "./tutorial-clips/tut3.webm", text: 'Your goal is to hit the ball back with the paddle. HINT: Use the glowing lines to estimate distance.', start: false, end: false})
-tutorialScreens.push({video: "./tutorial-clips/tut4.webm", text: 'The enemy will always hit the ball, speeding it up (you can adjust this in the accessibility menu). When you miss, the game ends.', start: false, end: false})
-tutorialScreens.push({video: "./tutorial-clips/tut5.webm", text: 'Your goal is to get as many points as possible – Good Luck!', start: false, end: true})
+tutorialScreens.push({video: "./tutorial-clips/tut1.mp4", text: 'After the countdown, the ball will launch forward.', start: true, end: false})
+tutorialScreens.push({video: "./tutorial-clips/tut2.mp4", text: `Use your ${mobileCheck() ? 'finger' : 'mouse'} to move your paddle around.`, start: false, end: false})
+tutorialScreens.push({video: "./tutorial-clips/tut3.mp4", text: 'Your goal is to hit the ball back with the paddle. HINT: Use the glowing lines to estimate distance.', start: false, end: false})
+tutorialScreens.push({video: "./tutorial-clips/tut4.mp4", text: 'The enemy will always hit the ball, speeding it up (you can adjust this in the accessibility menu). When you miss, the game ends.', start: false, end: false})
+tutorialScreens.push({video: "./tutorial-clips/tut5.mp4", text: 'Your goal is to get as many points as possible – Good Luck!', start: false, end: true})
 
 
 // Tutorial screen overlay
@@ -51,7 +51,7 @@ export default function TutorialScreen(props){
           </div>
 
           <video playsInline autoPlay muted loop className='tutVid' key={tutorialScreens[currentTutScreen].video}>
-            <source src={tutorialScreens[currentTutScreen].video} type="video/webm"/>
+            <source src={tutorialScreens[currentTutScreen].video} type="video/mp4"/>
             <p>
                 Your browser doesn't support HTML video. This video is described by the tutorial text below. 
             </p>
