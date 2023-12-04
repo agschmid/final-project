@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "./static/css/main.390615cd.css",
-    "main.js": "./static/js/main.a3e68734.js",
+    "main.js": "./static/js/main.cd949b0f.js",
     "static/media/vhs-lines.png": "./static/media/vhs-lines.b0e40dbb5dbf7edd3cbc.png",
     "index.html": "./index.html"
   },
   "entrypoints": [
     "static/css/main.390615cd.css",
-    "static/js/main.a3e68734.js"
+    "static/js/main.cd949b0f.js"
   ]
 }
