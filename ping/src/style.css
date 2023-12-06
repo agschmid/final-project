@@ -32,12 +32,6 @@ canvas{
     z-index: 1;
 }
 
-
-.vhs {
-    background-image: url('../public/textures/vhs-lines.png');
-    background-blend-mode: screen;
-}
-
 /* Button designs */
 
 button {

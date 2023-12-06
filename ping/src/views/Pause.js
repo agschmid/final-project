@@ -13,7 +13,7 @@ function PauseScreen(props){
     const setMusicPlaying = useStore(setMusicPlayingSelector)
 
     return (
-       <main id="pauseScreen" className='centeredScreen vhs'>
+       <main id="pauseScreen" className='centeredScreen'>
         <h1 className='blackPink'>PAUSED</h1>
         <button className='shortBox thinBox red bottomMargin' onClick={() => setOverlay('confirm')}>EXIT GAME</button>
         <button className='shortBox colorful' onClick={function() {props.toggleSound(); setMusicPlaying(!musicPlaying)}}>
