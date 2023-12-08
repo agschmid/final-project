@@ -30,7 +30,7 @@ export default function Slider(props){
 
   return (
     <div className="slidecontainer shadedBox">
-      <label htmlFor={props.setSliderVal}> <span>{props.title}: {props.sliderVal}</span></label>
+      <label htmlFor={props.setSliderVal}> <span className='sliderHeading'>{props.title}: {props.sliderVal}</span></label>
       <input id={props.setSliderVal} type="range" min={props.min} max={props.max}  step={props.step} value={props.sliderVal} className="slider" onChange={updateSlider}/>
       <span>{props.description}</span>
     </div>

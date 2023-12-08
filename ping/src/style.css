@@ -1,3 +1,5 @@
+/* Global CSS values */
+
 /* Basic layout, allowing stacking of divs */
 
 html{
@@ -32,7 +34,7 @@ canvas{
     z-index: 1;
 }
 
-/* Button designs */
+/* Global button designs */
 
 button {
     display: flex;
@@ -72,8 +74,6 @@ button:focus {
 button:focus:not(:focus-visible) {
     outline: 1px solid black;
 }
-
-
 
 
 /* Global font sizes, spacing, and color options */

@@ -10,6 +10,9 @@
     width: 280px;
 }
 
+.sliderHeading{
+    font-size: 150%;
+}
 
 /* Focus states so it works for keyboard tabbing */
 /* https://stackoverflow.com/questions/54087544/how-to-have-a-css-outline-on-a-button-tag-only-by-tab-but-not-on-click */
